@@ -1,0 +1,23 @@
+.searchBar {
+  align-items: end;
+  height: 70px;
+  justify-content: center;
+  display: flex;
+}
+.searchBar input {
+  width: 40vw;
+  max-width: 450px;
+  height: 1.9rem;
+  background: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid;
+  padding: 0 5px 0 25px;
+  color: rgb(150, 137, 137);
+  transition: border-color 0.2s;
+  
+}
+
+.searchBar input:focus{
+  border-bottom: 2px rgb(133, 133, 245) solid;
+}
