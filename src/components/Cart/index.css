@@ -5,6 +5,7 @@
   width: 60%;
 }
 
+
 .cart-container img{
   width: 15%;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
@@ -77,4 +78,42 @@
   margin-top: 20px;
   margin-left: 32%;
   border-radius: 5px;
+}
+
+
+@media only screen and  ((min-width: 350px) and (max-width: 1024px)) {
+
+  .cart-map {display: grid;
+  width: 80%;
+  grid-template-columns: repeat(auto-fit,minmax(240px, 1fr));
+  column-gap: 80px;
+  }
+  
+  .cart-info h3 {
+    font-size: 1em;
+  }
+  .cart-container {
+    display: flex;
+  }
+  
+  .cart-container img {
+    width: 75%;
+    margin-left: 15%;
+    border-radius: 5px;
+  }
+
+  .cart-info {
+    margin-left: 20px;
+  }
+
+  .card-cupon {
+    width: 80%;
+    height: 180px;
+    border: solid 1px black;
+    margin-left: 11%;
+  }
+  .cantidad p {
+    margin-top: 3px;
+  }
+  
 }

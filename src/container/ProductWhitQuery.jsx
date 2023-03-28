@@ -3,9 +3,9 @@ import {  useQuery } from "@apollo/client";
 import { TemplateLibro } from "../components/TemplateLibro";
 import { GET_PRODUCTS } from "../hoc/Query/getBook";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-
-export function ProductWhithQuery ({ isbn }) {
-  
+import { useParams } from "react-router-dom";
+export function ProductWhithQuery () {
+  const { isbn } = useParams();
   const { loading,  data } = useQuery(GET_PRODUCTS, {
     variables: { isbn }
   });

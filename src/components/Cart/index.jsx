@@ -43,7 +43,7 @@ export function Cart () {
 
   return (
     <aside>
-      <ul>
+      <ul className='cart-map'>
         {
           cart.map(product => (
             

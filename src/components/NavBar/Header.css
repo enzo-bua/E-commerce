@@ -17,9 +17,11 @@ header {
 	align-items: center;
 	justify-content: space-between;
 	height: 60px;
+	width: 100%;
 	padding: 0 2rem;
 	background-color: var(--mainColor);
 	color: var(--textColor);
+
 
 }
 
@@ -27,17 +29,15 @@ nav a {
 	margin: 0 1rem;
 	color: var(--textColor);
 	text-decoration: none;
+	font-size: 1.2em;
 }
 
 nav a:hover {
 	color: var(--secondaryColor);
-  font-size: 1.1em;
+  zoom: 105%;
 }
 
-.cart:hover, .notification:hover, .user:hover {
-  width: 28px;
-  height: 35px;
-}
+
 
 header .nav-btn {
 	padding: 5px;
@@ -48,7 +48,7 @@ header .nav-btn {
 	color: var(--textColor);
 	visibility: hidden;
 	opacity: 0;
-	font-size: 1.8rem;
+	font-size: 2.8rem;
 }
 
 header div,
@@ -63,6 +63,10 @@ nav {
   font-weight: bold;
 }
 
+.logo:hover {
+	zoom: 110%;
+}
+
 .div-section {
   margin-left: 350px;
   
@@ -71,6 +75,7 @@ nav {
 .cart, .notification, .user {
   width: 23px;
   height: 40px;
+	cursor: pointer;
 }
 
 
@@ -117,3 +122,4 @@ nav {
     gap:20px ;
   }
 }
+

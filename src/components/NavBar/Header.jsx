@@ -5,6 +5,7 @@ import { IoMdNotifications } from "react-icons/io";
 import { Link } from "react-router-dom";
 import './Header.css'
 import { useCart } from "../../hooks/useCart";
+import { SearchPoducts } from './../SearchProducts/index'
 
 export function Header () {
 
@@ -19,11 +20,12 @@ export function Header () {
 	};
 
 	return (
+		<>
 		<header>
 			<a href="/"><h3 className="logo">Books Shop</h3></a>
 			
 			<nav ref={navRef}>
-				<a href="/#">Libros</a>
+				<a href="/">Libros</a>
 				<a href="/category">Categorias</a>
 
         <div className="div-section">
@@ -44,5 +46,8 @@ export function Header () {
 				<FaBars />
 			</button>
 		</header>
-	);
+
+		<SearchPoducts />
+		</>
+		);
 }

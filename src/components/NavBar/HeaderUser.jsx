@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import './Header.css'
 import { useCart } from "../../hooks/useCart";
 import { MaterialDesign } from "../IconoLogin/Materialdsgn";
+import { SearchPoducts } from './../SearchProducts/index'
+
 export function HeaderUser () {
 
 
@@ -21,13 +23,14 @@ export function HeaderUser () {
 	};
 
 	return (
+		<>
 		<header>
 			<a href="/"><h3 className="logo">Books Shop</h3></a>
 			
 			<nav ref={navRef}>
-				<a href="/#">Libros</a>
+				<a href="/">Libros</a>
 				<a href="/category">Categorias</a>
-				<a href="/category/book">Favoritos</a>
+				<a href="/favoritos">Favoritos</a>
 				<a href="/historial">Historial</a>
         <div className="div-section">
           <a><IoMdNotifications className="notification"/></a>
@@ -47,5 +50,7 @@ export function HeaderUser () {
 				<FaBars />
 			</button>
 		</header>
-	);
+		<SearchPoducts />
+		</>
+		);
 }

@@ -26,6 +26,7 @@ export function UserFormLogin ({ onSubmit, title }) {
     } else {
       window.sessionStorage.setItem('token', data.LoginUser.accessToken)
       onSubmit()
+      Navigate('/')
     }
   }
  

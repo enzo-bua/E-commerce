@@ -3,12 +3,15 @@ import { Product } from '../Product'
 import { withProduct } from '../../hoc/Query/withProduct'
 import { useQuery } from '@apollo/client'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
+import { useSearch } from '../../hooks/useSearch'
+import { SearchPoducts } from '../SearchProducts'
+
 export function ListOfProducts () {
   // const { data, loading } = useQuery(withProduct, {
   //   variables: {isbn: '', nombre: '', genero: '', autor: ''}
   // })
-
   const { data, loading } = useQuery(withProduct)
+
 
   return (
     <section className='container'>

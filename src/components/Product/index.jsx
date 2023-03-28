@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 export function Product ({ product }) {
   return (
     <div className='card'>
-      <a href={`/?book=${product.isbn}`}>
+      <a href={`/book/${product.isbn}`}>
         <img src={product.url_imagen} alt="" />
         <div className='card-data'>
           <p className='name'>{product.nombre}</p>

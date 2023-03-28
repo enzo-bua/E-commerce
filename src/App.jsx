@@ -20,123 +20,51 @@ import { Detail } from "./pages/Detail";
 import  userContext  from "./Context/user";
 import { Historial } from "./pages/Historial";
 import { NotRegisterUser } from "./pages/NotRegisterUser";
-import { MaterialDesign } from './components/IconoLogin/Materialdsgn'
+import { Favoritos } from './pages/Favoritos'
 function App() {
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const bookID = urlParams.get('book');
-  const urlParamsCategory = new URLSearchParams(window.location.search);
-  const genero = urlParamsCategory.get('category');
-  
   return (
   
     <CartProvider>
-
-    
-    
-    {/* {
-       bookID || genero
-      ?
-      <>
-        <ProductWhithQuery isbn={bookID}/>
-        <BookCategoryQuery genero={genero} />
-       
-
-      </>
-      : <>
-     <Routes>
-          <Route path="/" element={  <Home />} />
-          <Route path="/book/:bookID" element={<Detail/>} />          
-          <Route path="/book/cart" element={<Cart />} />
-          <Route path="/book/information" element={<Information />} />   
-          <Route path="/book/payment" element={<Payment />} />          
-          <Route path="/category" element={<CategoryGetQuery />} />          
-         
-
-        </Routes>
-    
-
-      </>
-    } */}
-
-    <userContext.Consumer>
-      {
-      ({ isAuth }) => 
-        isAuth
-          ? <>
-          
-        <HeaderUser />
+      <userContext.Consumer>
         {
-       bookID || genero
-      ?
-      <>
-        <ProductWhithQuery isbn={bookID}/>
-        <BookCategoryQuery genero={genero} />
-       
+        ({ isAuth }) => 
+          isAuth
+            ? <>
+            
+              <HeaderUser />
+          
+              <Routes>
+                <Route path="/" element={<Home />}/>
+                <Route path="/book/cart" element={<Cart />} />
+                <Route path="/book/:isbn" element={<ProductWhithQuery />}/>
+                <Route path="/category" element={<CategoryGetQuery />} />          
+                <Route path="/category/:genero" element={<BookCategoryQuery />}/>
+                <Route path="/historial" element={<Historial />}/>
+                <Route path="/favoritos" element={<Favoritos />}/>
 
-      </>
-      : <>
-     <Routes>
-          <Route path="/" element={  <Home />} />
-          <Route path="/book/:bookID" element={<Detail/>} />          
-          <Route path="/book/cart" element={<Cart />} />
-          <Route path="/book/information" element={<Information />} />   
-          <Route path="/book/payment" element={<Payment />} />          
-          <Route path="/category" element={<CategoryGetQuery />} />          
-         
 
-        </Routes>
-    
+              </Routes>
+            </>
+          : <>
+            <Header />
+            
+            <Routes>
+            <Route path="/" element={<Home />}/>
+            <Route path="/book/:isbn" element={<ProductWhithQuery />}/>
+            <Route path="/category" element={<CategoryGetQuery />} />          
+            <Route path="/category/:genero" element={<BookCategoryQuery />}/>
 
-      </>
-    }
-        <Routes>
-          {/* <Route path="/book/cart" element={<Cart />} /> */}
-          <Route path="/login" element={<Historial />}/>
-          <Route path="/historial" element={<MaterialDesign />}/>
+            
+              <Route path="/login" element={<NotRegisterUser />}/>
+              <Route path="/historial" element={<NotRegisterUser />}/>
+              <Route path="/book/cart" element={<NotRegisterUser />}/>
 
-        </Routes>
+            </Routes>
           </>
-        : <>
-          <Header />
-          {
-       bookID || genero
-      ?
-      <>
-        <ProductWhithQuery isbn={bookID}/>
-        <BookCategoryQuery genero={genero} />
-       
+        }
+      </userContext.Consumer>
 
-      </>
-      : <>
-     <Routes>
-          <Route path="/" element={  <Home />} />
-          <Route path="/book/:bookID" element={<Detail/>} />          
-          <Route path="/book/cart" element={<Cart />} />
-          <Route path="/book/information" element={<Information />} />   
-          <Route path="/book/payment" element={<Payment />} />          
-          <Route path="/category" element={<CategoryGetQuery />} />          
-         
-
-        </Routes>
-    
-
-      </>
-    }
-      <Routes>
-
-          <Route path="/login" element={<NotRegisterUser />}/>
-          <Route path="/historial" element={<NotRegisterUser />}/>
-          {/* <Route path="/book/cart" element={<NotRegisterUser />}/> */}
-
-        </Routes>
-        </>
-      }
-    </userContext.Consumer>
-
-      
-
-  
   
     </CartProvider>
     )
