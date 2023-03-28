@@ -8,21 +8,6 @@ import { Link } from 'react-router-dom';
 function CartItem ({product}) {
   const { addToCart, removeFromCart, clearCart} = useCart() 
 
-  const increment = () => {
-    if (product.stock > 1) {
-    addToCart(product)
-    product.stock -= 1
-  } 
-  }
-  
-  const decrement = () => {
-    if (product.stock <= product.stock ) {
-      console.log(product.stock)
-    clearCart(product)
-    product.stock += 1
-  } 
-  }
-
   return (
       <div className='cart-container '>
         <img src={product.url_imagen} alt="" />    
@@ -31,9 +16,9 @@ function CartItem ({product}) {
           <p className='autor'>{product.autor[0].nombre}</p>
           <p >$ {product.precio}</p>
           <div className='cantidad'>
-            <button className='increment' onClick={() => increment()}>+</button>
+            <button className='increment' onClick={() =>addToCart(product)}>+</button>
             <p>{product.quantity}</p>
-            <button className='decrement' onClick={() => decrement()}>-</button>
+            <button className='decrement' onClick={() => clearCart(product)}>-</button>
             <button className='delate' onClick={() => removeFromCart(product)}><FaTrash size='20px'/> </button>
           </div>
           </div>
@@ -68,20 +53,21 @@ export function Cart () {
       </ul>
         <hr />
         {
-          cart.length > 0 && <div className='card-cupon'>
-          <h4>Canidad de libros {hanldeCantidadLibros()}</h4>
-          <div className='total'>
-          <h5>Total: </h5> 
-           <h5>$ {handleSumTotal()}</h5>
-          </div>
-          <BiRightArrowAlt className='icons' size='12px' />
-          <input type="text" placeholder='Cupon de descuento'  />
-         <button >Agregar</button>
-
-         <Link to='/book/information'><button className='continuar-pedido'>Continuar Pedido</button></Link> 
-      </div>
+          cart.length > 0 
+            ? 
+              <div className='card-cupon'>
+                <h4>Canidad de libros {hanldeCantidadLibros()}</h4>
+                <div className='total'>
+                <h5>Total: </h5> 
+                <h5>$ {handleSumTotal()}</h5>
+                </div>
+                <BiRightArrowAlt className='icons' size='12px' />
+                <input type="text" placeholder='Cupon de descuento'  />
+                <button >Agregar</button>
+                <Link to='/book/information'><button className='continuar-pedido'>Continuar Pedido</button></Link> 
+              </div>
+        : <h5 style={{color: 'red', display: 'grid', justifyContent: 'center'}}>No hay libros en tu carrito!</h5>
         }
-      
     </aside>          
   );         
 }

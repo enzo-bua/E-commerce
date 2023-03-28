@@ -2,24 +2,16 @@
 import {  useQuery } from "@apollo/client";
 import { TemplateLibro } from "../components/TemplateLibro";
 import { GET_PRODUCTS } from "../hoc/Query/getBook";
-
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export function ProductWhithQuery ({ isbn }) {
-
-  const { loading, error, data } = useQuery(GET_PRODUCTS, {
+  
+  const { loading,  data } = useQuery(GET_PRODUCTS, {
     variables: { isbn }
   });
   return (
     loading
-      ? <p>Cargando...</p>
+      ? <AiOutlineLoading3Quarters style={{marginLeft:'50%', marginTop: '20%'}} size='32px'/> 
       : data && <TemplateLibro product={data.getBook.book} />
-    
-    
-      
-    
   )
-
-    
-    
-
 }

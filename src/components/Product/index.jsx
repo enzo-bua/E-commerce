@@ -8,7 +8,7 @@ export function Product ({ product }) {
         <div className='card-data'>
           <p className='name'>{product.nombre}</p>
           <strong>$ {product.precio}</strong>
-          <p className='card-data-autor'>{product.autor[0].nombre}</p>
+          <p className='card-data-autor'>{product.autor.nombre}</p>
         </div>
       </a>
     </div>

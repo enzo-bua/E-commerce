@@ -2,6 +2,7 @@ import './index.css'
 import { Product } from '../Product'
 import { withProduct } from '../../hoc/Query/withProduct'
 import { useQuery } from '@apollo/client'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 export function ListOfProducts () {
   // const { data, loading } = useQuery(withProduct, {
   //   variables: {isbn: '', nombre: '', genero: '', autor: ''}
@@ -12,7 +13,7 @@ export function ListOfProducts () {
   return (
     <section className='container'>
       { loading
-        ? <p>Cargando...</p> 
+        ? <AiOutlineLoading3Quarters style={{marginLeft:'50%', marginTop: '30%'}} size='32px'/> 
         : 
           data && data.getBook.book.map(product => (
             <Product key={product.isbn} product={product} />

@@ -1,18 +1,17 @@
 import './index.css'
 import { useRef } from 'react' 
 import { Link} from 'react-router-dom'
-import { useMutation } from '@apollo/client'
-import { DATA_USER } from '../../hoc/Mutation/postDataUser'
+// import { DATA_USER } from '../../hoc/Mutation/postDataUser'
 export function Information () {
 
   const form = useRef()
 
-  const [dataUser] = useMutation(DATA_USER)
+  // const [dataUser] = useMutation(DATA_USER)
 
 
   const hanldeSumbit = () => {
 
-    dataUser({ variables: {tokenUser, nombre, direccion, dni, AgregarInfo, telefono, cod_postal} })
+    // dataUser({ variables: {tokenUser, nombre, direccion, dni, AgregarInfo, telefono, cod_postal} })
 
     const formData = new FormData(form.current)
     const buyer = {
@@ -24,7 +23,6 @@ export function Information () {
       'phone': formData.get('phone') ,
       'info': formData.get('info') 
     }
-    console.log(buyer)
   }
 
   return (

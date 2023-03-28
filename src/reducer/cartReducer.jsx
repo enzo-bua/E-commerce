@@ -12,15 +12,19 @@ export const updateLocalStorage = state => {
 }
 
 export const CartReducer = (state, action) => {
+
+
   const { type: actionType, payload: actionPayload  } = action 
   switch (actionType) {
     case CART_ACTION_TYPES.ADD_TO_CART: {
-      const { isbn } = actionPayload
+      const { isbn, stock } = actionPayload
       const productInCartIndex = state.findIndex(item => item.isbn === isbn)
       //producto esta en el carrito
       if (productInCartIndex >= 0){
         const newState = structuredClone(state)
-        newState[productInCartIndex].quantity += 1
+        if (newState[productInCartIndex].quantity < stock){
+          newState[productInCartIndex].quantity += 1
+        }
         updateLocalStorage(newState)
         return newState
       }
@@ -49,7 +53,17 @@ export const CartReducer = (state, action) => {
       //producto esta en el carrito
       if (productInCartIndex >= 0){
         const newState = structuredClone(state)
+        if (newState[productInCartIndex].quantity  > 0){
         newState[productInCartIndex].quantity -= 1
+        }
+        if (newState[productInCartIndex].quantity === 0){
+          CART_ACTION_TYPES.REMOVE_FROM_CART 
+            const { isbn } = actionPayload
+            const newState = state.filter(item => item.isbn !== isbn)
+            updateLocalStorage(newState)
+            return newState
+          
+        }
         updateLocalStorage(newState)
         return newState
       }

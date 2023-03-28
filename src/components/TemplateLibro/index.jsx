@@ -3,7 +3,6 @@ import { BsFillCartCheckFill } from 'react-icons/bs'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useCart } from '../../hooks/useCart'
-import { useRef, useState } from 'react'
 
 
 
@@ -11,8 +10,7 @@ import { useRef, useState } from 'react'
 
 
 export function TemplateLibro ({ product }) {
-  console.log(product)
-  const ref = useRef()
+
   
   const key = `favoritos-${product[0].isbn}`
   const [ favoritos, setFavoritos ] = useLocalStorage(key, false)
@@ -55,7 +53,7 @@ export function TemplateLibro ({ product }) {
             Agregar a carrito <BsFillCartCheckFill size='20px'/> 
           </button>
 
-          <input ref={ref} className='input' type="number" min='0' max={product[0].stock} />
+          <input className='input-cantidad' type="number" min='0' max={product[0].stock} />
 
         </div>
         <hr />
