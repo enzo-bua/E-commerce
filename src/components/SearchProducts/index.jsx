@@ -6,18 +6,20 @@ export function SearchPoducts () {
 
  const search = useInputValue('')
   const Navigate = useNavigate()
- const handleSearch = () => {
 
- }
+  const handleSearch = (event) => {
+    event.preventDefault();
+    Navigate(`/book/${search.value}`);
+  };
  
   return (
-    <form className="searchBar">
+    <form className="searchBar" onSubmit={handleSearch}>
 
     <input 
       type="text" 
       placeholder="Libro, autor, etc..."  
       {...search}
-      onSubmit={() => Navigate.push(`/?book=${search.value}`)}
+      
     />
 
     <FaSearch className="searchBarIcon" />

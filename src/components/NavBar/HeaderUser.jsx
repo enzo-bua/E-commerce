@@ -50,7 +50,7 @@ export function HeaderUser () {
 				<FaBars />
 			</button>
 		</header>
-		<SearchPoducts />
+		{/* <SearchPoducts /> */}
 		</>
 		);
 }

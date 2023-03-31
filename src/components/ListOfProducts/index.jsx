@@ -5,14 +5,11 @@ import { useQuery } from '@apollo/client'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 import { useSearch } from '../../hooks/useSearch'
 import { SearchPoducts } from '../SearchProducts'
+import { useParams } from 'react-router-dom'
 
 export function ListOfProducts () {
-  // const { data, loading } = useQuery(withProduct, {
-  //   variables: {isbn: '', nombre: '', genero: '', autor: ''}
-  // })
   const { data, loading } = useQuery(withProduct)
-
-
+  // const { data, loading } = useQuery(withProduct)
   return (
     <section className='container'>
       { loading

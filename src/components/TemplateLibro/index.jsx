@@ -3,17 +3,21 @@ import { BsFillCartCheckFill } from 'react-icons/bs'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useCart } from '../../hooks/useCart'
-
-
-
-
-
+import { useContext } from 'react'
+import { userContext } from '../../Context/user'
+import { useMutation } from '@apollo/client'
+import { POST_FAVORITOS } from '../../hoc/Mutation/postFavoritos'
 
 export function TemplateLibro ({ product }) {
+  const  [agregarFavoritos]  = useMutation(POST_FAVORITOS)
 
-  
+  const { isAuth } = useContext(userContext)
+  // console.log(isAuth)
+  // const [tokenFav, setTokenFav] = useLocalStorage(isAuth, false)
+
   const key = `favoritos-${product[0].isbn}`
   const [ favoritos, setFavoritos ] = useLocalStorage(key, false)
+
   const Icons = favoritos ? AiFillHeart : AiOutlineHeart
 
   const { cart, addToCart} = useCart()
@@ -22,12 +26,22 @@ export function TemplateLibro ({ product }) {
     return null
   }
 
+  const handleFavoritos = () => {
+    if (isAuth !== null){
+      // setTokenFav(!tokenFav)
+      setFavoritos(!favoritos)
+      agregarFavoritos({ variables: { tokenUser: isAuth, isbn: product[0].isbn} })
+    } else {
+      alert('registrese')
+    }
+  }
+
   
   return (
       <div className='book'>
         <img src={product[0].url_imagen} alt="" />    
         <div className='book-info'>
-          <button className='favoritos-button' onClick={() => setFavoritos(!favoritos)}>
+          <button className='favoritos-button' onClick={handleFavoritos}>
             <Icons size='32px'/>
           </button>
           <h3>{product[0].nombre}</h3>

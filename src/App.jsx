@@ -35,7 +35,7 @@ function App() {
               <HeaderUser />
           
               <Routes>
-                <Route path="/" element={<Home />}/>
+                <Route path="/" element={<ListOfProducts />}/>
                 <Route path="/book/cart" element={<Cart />} />
                 <Route path="/book/:isbn" element={<ProductWhithQuery />}/>
                 <Route path="/category" element={<CategoryGetQuery />} />          
@@ -50,7 +50,7 @@ function App() {
             <Header />
             
             <Routes>
-            <Route path="/" element={<Home />}/>
+            <Route path="/" element={<ListOfProducts />}/>
             <Route path="/book/:isbn" element={<ProductWhithQuery />}/>
             <Route path="/category" element={<CategoryGetQuery />} />          
             <Route path="/category/:genero" element={<BookCategoryQuery />}/>

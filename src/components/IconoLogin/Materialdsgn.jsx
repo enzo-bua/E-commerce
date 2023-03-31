@@ -6,11 +6,12 @@ import Tooltip from '@mui/material/Tooltip';
 import { FaUserAlt } from "react-icons/fa";
 import {userContext} from '../../Context/user'
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function MaterialDesign() {
 
   const { removeAuth } = useContext(userContext)
-
+  const Navigate = useNavigate()
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -22,6 +23,11 @@ export function MaterialDesign() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleCerrarSesion = () => {
+    removeAuth()
+    Navigate('/')
   };
 
   return (
@@ -48,7 +54,7 @@ export function MaterialDesign() {
               onClose={handleCloseUserMenu}
             >
               < FaUserAlt size="30px" style={{display: 'flex', marginBottom: '10px', marginLeft: '8px'}}/>
-              <button style={{background: 'transparent', border: 'none'}} onClick={removeAuth}><AiOutlineLogin size="35px" /></button>
+              <button style={{background: 'transparent', border: 'none'}} onClick={handleCerrarSesion}><AiOutlineLogin size="35px" /></button>
 
             </Menu>
  

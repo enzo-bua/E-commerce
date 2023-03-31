@@ -47,7 +47,7 @@ export function Header () {
 			</button>
 		</header>
 
-		<SearchPoducts />
+		{/* <SearchPoducts /> */}
 		</>
 		);
 }

@@ -4,6 +4,7 @@ import { REGISTER } from '../../hoc/Mutation/postRegister'
 
 import { useMutation } from '@apollo/client';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 export function UserFormRegister ({ onSubmit, title }) {
@@ -12,40 +13,33 @@ export function UserFormRegister ({ onSubmit, title }) {
   const email = useInputValue('')
   const password = useInputValue('')
   const [ error, setError ] = useState()
-  const [createUser] = useMutation(REGISTER)
+  const [createUser, {data,loading}] = useMutation(REGISTER)
   
 
   const handleSubmit = (e) => {
     e.preventDefault()
     createUser({ variables: { nombre: name.value, email: email.value , password: password.value } }) 
-    .then(onSubmit)
+    .then(null)
     .catch(err => setError(err.message))
   }
  
   
+
   return (
     <>    
-      {/* <form className='card' onSubmit={handleSubmit}>
-      <h3 className='tit'>{title}</h3>
-      <input  placeholder='Name' type='text' {...name}/>
-        <input  placeholder='Email' type='text' {...email}/>
-        <input placeholder='Password' type='password' {...password} />
-        {error === 'Cannot return null for non-nullable field SendUser.user.' ? <p style={{display: 'grid', justifyContent:'center', color:'red'}}>Usuario ya existente</p> : null}
-        <button  className='but'>{title}</button>
-        </form> */}
-
-  <form className="form" onSubmit={handleSubmit}>
+ <form className="form"  onSubmit={handleSubmit} >
+    {data && window.sessionStorage.setItem('token', data.registrarse.accessToken)}
+    {data && onSubmit()}
     <span className="title">{title}</span>
     <label className="label">Username</label>
-    <input type="text" className="input" {...name}/>
+    <input type="text" className="input" {...name} disabled={loading}/>
     <label className="label">Email</label>
-    <input type="email" className="input" {...email}/>
+    <input type="email" className="input" {...email} disabled={loading}/>
     <label className="label">Password</label>
-    <input type="password" name="password"  className="input" {...password}/>
+    <input type="password" name="password"  className="input" {...password} disabled={loading}/>
     {error === 'Cannot return null for non-nullable field SendUser.user.' ? <p style={{display: 'grid', justifyContent:'center', color:'red'}}>Error, Usuario ya existente</p> : null}
-    <button type="submit" className="submit">{title}</button>
+    <button type="submit" className="submit" disabled={loading}>{title}</button>
   </form>
-
       
     </>
   )

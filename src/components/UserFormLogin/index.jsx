@@ -12,7 +12,7 @@ export function UserFormLogin ({ onSubmit, title }) {
   const password = useInputValue('')
   const [ error, setError ] = useState()
 
-  const { data, loading } = useQuery(LOGIN, {
+  const { data } = useQuery(LOGIN, {
     variables: { email: email.value, password: password.value}
   })
 
@@ -20,7 +20,6 @@ export function UserFormLogin ({ onSubmit, title }) {
   const handleSubmit = (e) => {
     onSubmit
     e.preventDefault()
-    // data.LoginUser.accessToken === '' ? setError('Error, Usuario no registrado') : onSubmit()
     if (data.LoginUser.accessToken === ''){
       setError('Error, Usuario no registrado')
     } else {
