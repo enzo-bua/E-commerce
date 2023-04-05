@@ -9,8 +9,24 @@ import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/c
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({ 
-    uri: 'https://bookshop-production-a4f1.up.railway.app/graphql'
+    uri: 'http://localhost:3000/graphql'
   })
+  // request: operation => {
+  //   const token = window.sessionStorage.getItem('token')
+  //   const authorization = token ? `${token}` : ''
+  //   operation.setContext({
+  //     headers: {
+  //       authorization
+  //     }
+  //   })
+  // },
+  // onError: error => {
+  //   const { networkError } = error
+  //   if (networkError && networkError.results.code === 'invalid_token'){
+  //     window.sessionStorage.removeItem('token')
+  //     window.location.href = '/'
+  //   }
+  // }
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
