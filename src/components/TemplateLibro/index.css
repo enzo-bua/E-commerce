@@ -35,7 +35,7 @@ strong {
 hr{
   margin-top: 70px;
 }
-p{
+.book-info p{
   justify-content: start;
 }
 .price {

@@ -1,31 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Modificar.css'
 import { useRef } from 'react'
 import { UPDATE_BOOK } from '../hoc/Mutation/UpdateBook'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
+import { useNavigate, useParams } from 'react-router-dom'
+import { GET_BOOK_ISBN } from '../hoc/Query/getBookIsbn'
 
 export function Modificar(props) {
-  // const [updateBook, { data } ] = useMutation(UPDATE_BOOK)
+  const [updateBook ] = useMutation(UPDATE_BOOK)
+  const { isbn } = useParams()
+  const { data } = useQuery(GET_BOOK_ISBN, {
+    variables: { isbn }
+  });
+
+  const [error, setError] = useState('')
   const form = useRef()
-  
+  const navigate = useNavigate()
+
+
   const onCancel = () =>{
     props.setOpenModalMod(false);
+    navigate('/')
   }  
-  const hanldeSumbit = () => {
-
-    
+  const hanldeSumbit = (e) => {
+    e.preventDefault()
     const formData = new FormData(form.current)
     const buyer = {
-      'name': formData.get('name'),
       'isbn': formData.get('isbn'),
-      'autor': formData.get('autor'),
+      'imagen': formData.get('imagen'),
+      'name': formData.get('name'),
+      'precio': formData.get('precio'),
       'stock': formData.get('stock'),
       'descripcion': formData.get('descripcion'),
+      'fechaIngreso': formData.get('fechaIngreso'),
+      'editorial': formData.get('editorial'),
+      'descuento': formData.get('descuento'),
       'genero': formData.get('genero') ,
-      'precio': formData.get('precio') ,
-      'imagen': formData.get('imagen')
+      'autor': formData.get('autor')
     }
-    // updateBook({ variables: {:buyer.name,  :buyer.isbn,  :buyer.autor,  :buyer.stock,  :buyer.descripcion,  :buyer.genero,  :buyer.precio} })
+    updateBook ({ 
+      variables: {isbnOrig: isbn, isbn: buyer.isbn, imagen: buyer.imagen, nombre: buyer.name, precio: parseFloat(buyer.precio), 
+      stock :parseInt(buyer.stock), descripcion: buyer.descripcion, fechaIngreso: buyer.fechaIngreso, editorial: buyer.editorial,
+      descuento: parseFloat(buyer.descuento), genero: buyer.genero, autor: buyer.autor} 
+    })
+  .then()
+  .catch(error => setError(error.message))
   }
   return (
     <div className='Information' >
@@ -33,23 +52,30 @@ export function Modificar(props) {
     <div className='Information-form'>
       <form ref={form} onSubmit={hanldeSumbit}>
         <label>Nombre </label>
-        <input type="text" name="name" />
+        <input defaultValue={data && data.getBook.book[0].nombre} type="text" name="name"/>
         <label>Isbn </label>
-        <input type="text" name="isbn" />
+        <input  defaultValue={data && data.getBook.book[0].isbn} type="text" name="isbn" />
         <label>Autor </label>
-        <input type="text" name="autor" />
+        <input  defaultValue={data && data.getBook.book[0].autor[0].nombre}  type="text" name="autor" />
         <label>Stock </label>
-        <input type="number" name="stock" />
+        <input  defaultValue={data && data.getBook.book[0].stock} type="number" name="stock" min="0"/>
         <label>Descripcion</label>
-        <textarea type="text" name="descripcion" />
+        <textarea  defaultValue={data && data.getBook.book[0].descripcion} type="text" name="descripcion" />
         <label>Genero </label>
-        <input type="text" name="genero" />
+        <input  defaultValue={data && data.getBook.book[0].genero[0].nombre} type="text" name="genero" />
         <label>Precio </label>
-        <input type="number" name="precio" />
+        <input  defaultValue={data && data.getBook.book[0].precio} min="0" type="number" name="precio" />
+        <label>Descuento </label>
+        <input  defaultValue={data && data.getBook.book[0].descuento} min="0" type="number" name="descuento" />
+        <label>Fecha de Ingreso </label>
+        <input  defaultValue={data && data.getBook.book[0].fecha_ingreso} type="text" name="fechaIngreso" />
+        <label>Editorial </label>
+        <input  defaultValue={data && data.getBook.book[0].editorial.nombre} type="text" name="editorial" />
         <label>Imagen</label>
-        <input className='file' type="file" name='imagen' />
-        <button type='button'>Guardar</button>
-        <button className='but-cancel' type='button' onClick={onCancel}>Cancelar</button>
+        <input  defaultValue={data && data.getBook.book[0].url_imagen} className='file' type="text" name='imagen' />
+        {error && <p>Error, no puede haber un campo vacio</p>}
+        <button className='button-guardar' type='submit'>Guardar</button>
+        <button className='button-cancel' type='button' onClick={onCancel}>Cancelar</button>
       </form>
     </div>
 

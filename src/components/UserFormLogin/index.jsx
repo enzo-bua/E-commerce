@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client'
 import { LOGIN } from '../../hoc/Query/getUser'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { LoginGoogle } from './OauthGoogle'
 
 
 export function UserFormLogin ({ onSubmit, title }) {
@@ -43,6 +44,7 @@ export function UserFormLogin ({ onSubmit, title }) {
     <button type="submit" className="submit">{title}</button>
   </form>
 
+  {/* <LoginGoogle /> */}
       
     </>
   )

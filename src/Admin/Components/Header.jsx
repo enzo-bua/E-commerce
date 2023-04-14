@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { FaBars, FaTimes, FaUserAlt } from "react-icons/fa";
 import '../../components/NavBar/Header.css'
+import { userContext } from "../../Context/user";
 
 export function Header () {
 
+	const { removeAuth } = useContext(userContext)
 
   const navRef = useRef();
 
@@ -16,11 +18,14 @@ export function Header () {
 	return (
 		<>
 		<header>
-			<a href="/"><h3 className="logo">Books Shop</h3></a>
+			<a href="/"><h3 className="logo">ADMINISTRADOR</h3></a>
 			
 			<nav ref={navRef}>
-				<a href="/">Libros</a>
-				<a href="/category">Categorias</a>
+				<a style={{fontFamily:'monospace'}} href="/admin/productos">Productos</a>
+				<a style={{fontFamily:'monospace'}} href="/admin/ventas">Ventas</a>
+				<a style={{fontFamily:'monospace'}} href="/admin/user">AgregarAdmin</a>
+				<a style={{fontFamily:'monospace'}} href="/" onClick={removeAuth}>Salir</a>
+
 
 				<button
 					className="nav-btn nav-close-btn"

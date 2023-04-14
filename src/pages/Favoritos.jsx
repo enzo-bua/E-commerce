@@ -1,9 +1,9 @@
-import React from 'react'
 
-export  function Favoritos() {
+import React from 'react'
+import { FavoritosUsers } from '../container/FavoritosUsers'
+
+export function Favoritos() {
   return (
-    <div>
-      fav
-    </div>
+    <FavoritosUsers />
   )
 }

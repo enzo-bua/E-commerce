@@ -5,13 +5,21 @@
   
 }
 .agregarButton {
-  margin-top: 10px;
-  margin-left: 20px;
+  margin-top: 50px;
+  margin-left: 30px;
+  height: 30px;
+  background-color: rgb(222, 104, 220);
+  border-radius: 5px;
+  border-color: rgb(255, 107, 253);
 }
-
-
-
-
+.div-buscador input{
+  margin-left: 150%;
+  width: 100%;
+  height: 40px;
+  border: solid 1px;
+  border-radius: 5px;
+  text-align: center;
+}
 
 .agregarButton button {
   background-color: rgb(140, 140, 245);
@@ -47,8 +55,8 @@
 table {
   border-collapse: collapse;
   width: 90%;
-  margin-top: 5%;
-  margin-left: -7%;
+  margin-top: 12%;
+  margin-left: -20%;
 }
 th, td {
   border: 1px solid #ddd;
@@ -72,4 +80,48 @@ th {
 
 .option button{
   background-color: #d592e8;
+}
+
+@media only screen and  ((min-width: 350px) and (max-width: 1024px)) {
+
+  table {
+    width: 83%;
+    margin-top: 110px;
+    margin-left: -14%;
+  }
+  td {
+    border: none;
+  }
+
+  table tr {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    padding: 1em;
+    margin-bottom: 1em;
+  }
+
+  table thead {
+    display: none;
+  }
+
+  table td[data-title] {
+    display: flex;
+  }
+
+  table td[data-title]::before {
+    content: attr(data-title);
+    font-weight: bold;
+  }
+
+  .imagen {
+    height: 250px;
+    width: 50%;
+    margin-left: 113px;
+  }
+  .agregarButton {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+
 }
