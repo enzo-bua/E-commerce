@@ -2,17 +2,29 @@
   margin-top: 60px;
   margin-left: 25%;
   display: flex;
-  width: 60%;
+  width: 80%;
+}
+
+.cart-map {
+  display: grid;
+  width: 80%;
+  grid-template-columns: repeat(auto-fit,minmax(500px, 1fr));
+  margin-left: 5%;
+
 }
 
 
 .cart-container img{
-  width: 15%;
+  width: 30%;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
 }
 
 .cart-info {
   margin-left: 20px;
+}
+
+.cart-info p {
+  justify-content: start;
 }
 
 .cantidad {
@@ -42,6 +54,7 @@
   height: 180px;
   border: solid 1px black;
   margin-left: 35%;
+  margin-bottom: 20px;
   
 }
 
@@ -107,13 +120,41 @@
   }
 
   .card-cupon {
-    width: 80%;
+    width: 90%;
     height: 180px;
     border: solid 1px black;
-    margin-left: 11%;
+    margin-left: 5%;
   }
   .cantidad p {
     margin-top: 3px;
   }
+
+
+  
+  .icons {
+    margin-left: 20px;
+  }
+  
+  .card-cupon input {
+    margin-top: 15px;
+    margin-left: 10px;
+    width: 60%;
+    border: solid 1px black;
+  }
+  
+  
+  
+  .card-cupon button {
+    background-color:rgb(140, 140, 245);
+    border: solid 1px black;
+    color: white;
+  }
+  
+  .continuar-pedido {
+    margin-top: 25px;
+    margin-left: 27%;
+    border-radius: 5px;
+  }
+  
   
 }

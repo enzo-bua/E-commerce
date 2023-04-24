@@ -5,6 +5,7 @@ import App from './App'
 import './index.css'
 import userContext from './Context/user' 
 import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client'
+import { FiltersProvider } from './Context/filters'
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({ 
@@ -32,7 +33,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <userContext.Provider>
     <ApolloProvider client={client}> 
     <BrowserRouter>
+      <FiltersProvider>
         <App  />
+      </FiltersProvider>
       </BrowserRouter>
     </ApolloProvider>
   </userContext.Provider>

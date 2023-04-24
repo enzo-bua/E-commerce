@@ -22,8 +22,11 @@ export function Header () {
 			
 			<nav ref={navRef}>
 				<a style={{fontFamily:'monospace'}} href="/admin/productos">Productos</a>
+				<a style={{fontFamily:'monospace'}} href="/admin/categorias">Categorias</a>
 				<a style={{fontFamily:'monospace'}} href="/admin/ventas">Ventas</a>
 				<a style={{fontFamily:'monospace'}} href="/admin/user">AgregarAdmin</a>
+				<a style={{fontFamily:'monospace'}} href="/admin/cupon">Cupon</a>
+
 				<a style={{fontFamily:'monospace'}} href="/" onClick={removeAuth}>Salir</a>
 
 

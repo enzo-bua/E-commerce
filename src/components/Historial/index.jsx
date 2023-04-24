@@ -1,17 +1,15 @@
 import React from 'react'
-
-export function index() {
+import './index.css'
+import { AddStartsComponents } from '../AddStartComponents'
+export function Historial({ product }) {
   return (
-      <div className='cart-container '>
-        <img src={product.url_imagen} alt="" />    
-        <div className='cart-info'>
-          <h3>{product.nombre}</h3>
-          <p className='autor'>{product.autor[0].nombre}</p>
-          <p >$ {product.precio}</p>
-          <div className='cantidad'>
-          </div>
-          </div>
-
+    <div className='tarjeta'>
+      <img src={product.url_imagen} alt="" />
+      <div className='tarjeta-data'>
+        <p className='name'>{product.nombre}</p>
+        <p>{product.autor[0].nombre}</p>
+        <p style={{marginTop: '-10px'}}><AddStartsComponents isbn={product.isbn}/></p>
       </div>
+    </div>
   )
 }

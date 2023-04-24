@@ -24,7 +24,7 @@ export function AgregarUser(props) {
     createUserAdmin({
       variables: {nombre: buyer.name, email: buyer.email, password: buyer.password}
     })
-    .then(window.location.reload(false))
+    .then(null)
     .catch(null)
     
   }
@@ -39,7 +39,13 @@ export function AgregarUser(props) {
             <input type="email" name="email" />
             <label>Password </label>
             <input type="password" name="password" />
-            {data && <p>{data.UserAdminRegister.message}</p>}
+            {
+              data 
+                ? data.UserAdminRegister.message  !== 'ERROR, ESTE CORREO YA ES ADMIN DE BOOKSHOP' 
+                  ? window.location.reload(true)
+                  : <p>{data.UserAdminRegister.message}</p>
+                : null
+            }
             <button className='button-guardar' type='submit'>Guardar</button>
             <button className='button-cancel' type='button' onClick={onCancel}>Cancelar</button>
           </form>

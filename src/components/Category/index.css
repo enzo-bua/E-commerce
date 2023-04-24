@@ -28,3 +28,12 @@
   font-size: 1.4em;
 }
 
+.button-agregar {
+  margin-top: 50px;
+  margin-left: 30px;
+  height: 30px;
+  background-color: rgb(222, 104, 220);
+  border-radius: 5px;
+  border-color: rgb(255, 107, 253);
+}
+

@@ -9,7 +9,7 @@ export function SearchPoducts () {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    Navigate(`/book/${search.value}`);
+    Navigate(`/${search.value}`);
   };
  
   return (

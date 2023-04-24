@@ -6,6 +6,16 @@
   width: 60%;
 }
 
+.comentarios {
+  display: grid;
+}
+.comentarios strong{
+ margin-bottom: 20px;
+ margin-left: 25%;
+ font-size: 1.3em;
+}
+
+
 .book img{
   width: 35%;
   height: 65%;
@@ -66,6 +76,8 @@ hr{
   background-color: transparent;
   border: none;
 }
+
+
 @media only screen and  ((min-width: 350px) and (max-width: 1024px)) {
 
   .book {
@@ -84,6 +96,10 @@ hr{
   
   .book-info {
     margin-left: -35px;
+  }
+
+  .decripcion{
+    width: 80%;
   }
 
   .book-info h3 {

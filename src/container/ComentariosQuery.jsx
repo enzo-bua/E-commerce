@@ -1,12 +1,14 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_COMENTARIOS } from '../hoc/Query/getComentarios'
-export  function ComentariosQuery() {
+import { Comentarios } from '../components/Comentarios'
+export  function ComentariosQuery({ isbn }) {
   const { data } = useQuery(GET_COMENTARIOS,{
-    variables: { isbn: '126' }
+    variables: { isbn: isbn}
   })
-  data && console.log(data)
   return (
-  data && console.log(data)
+    data && data.getBook.book[0].opiniones.map((comen) => (
+      <Comentarios comentario={comen} isbn={isbn} />
+    )) 
   )
 }

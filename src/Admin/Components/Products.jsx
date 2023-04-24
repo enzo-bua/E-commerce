@@ -83,7 +83,7 @@ export function Products({ data, loading }) {
                           <td data-title='Autor: '>.</td>
                           <td data-title='Stock: '>{product.stock}</td>
                           <td data-title='Descripcion: '>{product.descripcion.slice(0, 150)}</td>
-                          <td data-title='Genero: '>{product.genero[0].nombre}</td>
+                          {/* <td data-title='Genero: '>{product.genero[0].nombre}</td> */}
                           <td data-title='$ '>{product.precio}</td>
                           <td data-title='Descuento: '>{product.descuento}</td>
                           <td data-title='Editorial: '>{product.editorial.nombre}</td>

@@ -43,7 +43,7 @@ export function Modificar(props) {
       stock :parseInt(buyer.stock), descripcion: buyer.descripcion, fechaIngreso: buyer.fechaIngreso, editorial: buyer.editorial,
       descuento: parseFloat(buyer.descuento), genero: buyer.genero, autor: buyer.autor} 
     })
-  .then()
+  .then(window.location.reload(true))
   .catch(error => setError(error.message))
   }
   return (
@@ -74,7 +74,7 @@ export function Modificar(props) {
         <label>Imagen</label>
         <input  defaultValue={data && data.getBook.book[0].url_imagen} className='file' type="text" name='imagen' />
         {error && <p>Error, no puede haber un campo vacio</p>}
-        <button className='button-guardar' type='submit'>Guardar</button>
+        <button className='button-guardar'>Guardar</button>
         <button className='button-cancel' type='button' onClick={onCancel}>Cancelar</button>
       </form>
     </div>

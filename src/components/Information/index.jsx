@@ -1,69 +1,139 @@
 import './index.css'
 import { useContext, useRef } from 'react' 
 import { Link} from 'react-router-dom'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { DATA_USER } from '../../hoc/Mutation/postDataUser'
 import { userContext } from '../../Context/user'
+import { useState } from 'react'
+import { GET_INFORMATION } from '../../hoc/Query/getInformation'
 export function Information () {
 
   const { isAuth } = useContext(userContext)
-console.log(isAuth)
   const form = useRef()
 
-  const [dataUser, {data}] = useMutation(DATA_USER)
-
+  const [dataUser] = useMutation(DATA_USER)
+  const { data } = useQuery(GET_INFORMATION, {
+    variables: { tokenUser: isAuth }
+  })
+  const [selectedProvince, setSelectedProvince] = useState(' ');
+  const [error, setError] = useState('')
+  const provinces = [
+    { name: 'Buenos Aires', abbreviation: 'BA' },
+    { name: 'Catamarca', abbreviation: 'CT' },
+    { name: 'Chaco', abbreviation: 'CH' },
+    { name: 'Chubut', abbreviation: 'CHU' },
+    { name: 'Córdoba', abbreviation: 'CO' },
+    { name: 'Corrientes', abbreviation: 'CR' },
+    { name: 'Entre Ríos', abbreviation: 'ER' },
+    { name: 'Formosa', abbreviation: 'FO' },
+    { name: 'Jujuy', abbreviation: 'JU' },
+    { name: 'La Pampa', abbreviation: 'LP' },
+    { name: 'La Rioja', abbreviation: 'LR' },
+    { name: 'Mendoza', abbreviation: 'MZ' },
+    { name: 'Misiones', abbreviation: 'MI' },
+    { name: 'Neuquén', abbreviation: 'NQ' },
+    { name: 'Río Negro', abbreviation: 'RN' },
+    { name: 'Salta', abbreviation: 'SA' },
+    { name: 'San Juan', abbreviation: 'SJ' },
+    { name: 'San Luis', abbreviation: 'SL' },
+    { name: 'Santa Cruz', abbreviation: 'SC' },
+    { name: 'Santa Fe', abbreviation: 'SF' },
+    { name: 'Santiago del Estero', abbreviation: 'SE' },
+    { name: 'Tierra del Fuego', abbreviation: 'TF' },
+    { name: 'Tucumán', abbreviation: 'TU' },
+  ];
+  
+  const handleProvinceChange = (event) => {
+    setSelectedProvince(event.target.value);
+  }
+  
 
   const hanldeSumbit = (e) => {
     e.preventDefault()
     const formData = new FormData(form.current)
-    const buyer = {
-      'name': formData.get('name'),
-      'address': formData.get('address'),
-      'dni': formData.get('dni'),
-      'cp': formData.get('cp'),
-      'phone': formData.get('phone') ,
-      'info': formData.get('info') 
+  
+    // Validar que todos los campos estén completos
+    if (
+      formData.get('name') !== '' &&
+      formData.get('address') !== '' &&
+      formData.get('dni') !== '' &&
+      formData.get('cp') !== '' &&
+      formData.get('phone') !== '' &&
+      formData.get('info') !== '' &&
+      formData.get('ciudad') !== '' &&
+      selectedProvince !== 'Seleccione una provincia' && selectedProvince !== ' '
+    ) {
+      const buyer = {
+        'name': formData.get('name'),
+        'address': formData.get('address'),
+        'dni': formData.get('dni'),
+        'cp': formData.get('cp'),
+        'phone': formData.get('phone'),
+        'info': formData.get('info'),
+        'ciudad': formData.get('ciudad')
+      }
+  
+      dataUser({
+        variables: {
+          tokenUser: isAuth,
+          nombre: buyer.name,
+          dni: buyer.dni,
+          direccion: buyer.address,
+          nombreCiudad: buyer.ciudad,
+          nombreProv: selectedProvince,
+          agregarInfo: buyer.info,
+          telefono: buyer.phone,
+          codPostal: buyer.cp
+        }
+      })
+      .then(null)
+      .catch(error => console.log(error.message))
+    } else {
+      // Si algún campo está vacío, mostrar un mensaje de error o realizar otra acción según sea necesario.
+      setError('Por favor, complete todos los campos.')
     }
-    dataUser({ 
-      variables: {
-        tokenUser : isAuth,
-        nombre: buyer.name, 
-        dni: buyer.dni, 
-        direccion: buyer.address, 
-        AgregarInfo: buyer.info, 
-        telefono: buyer.phone, 
-        cod_postal: parseFloat(buyer.cp)
-      } 
-    })
-    .then(null)
-    .catch(error => console.log(error.message))
   }
-
   return (
     <div className="Information">
-      {data && console.log(data)}
       <h5>Complete con sus datos de envio: </h5>
       <div className="Information-form">
         <form ref={form} onSubmit={hanldeSumbit}>
-          <input type="text" placeholder="Nombre completo" name="name" />
-          <input type="text" placeholder="Direccion" name="address" />
-          <input type="text" placeholder="DNI" name="dni" />
-          <input type="text" placeholder="Codigo postal" name="cp" />
-          <input type="text" placeholder="Telefono" name="phone" />
-          <input type="text" placeholder="Info" name="info" />
-          <button>yes</button>
+          <label style={{fontWeight: 'bold'}}>Nombre</label>
+          <input defaultValue={data && data.LoginUser.user.nombre} type="text" placeholder="Nombre completo" name="name" />
+          <label style={{fontWeight: 'bold'}}>DNI</label>
+          <input defaultValue={data && data.LoginUser.user.direccion.dni} type="text" placeholder="DNI" name="dni" />
+          <label style={{fontWeight: 'bold'}}>Direccion</label>
+          <input defaultValue={data && data.LoginUser.user.direccion.direccion} type="text" placeholder="Direccion" name="address" />
+          <label style={{fontWeight: 'bold'}}>Ciudad</label>
+          <input defaultValue={data && data.LoginUser.user.direccion.ciudad.nombre} type="text" placeholder="ciudad" name="ciudad" />
+
+          <label style={{fontWeight: 'bold'}}>Provincia</label>
+          <select value={selectedProvince} onChange={handleProvinceChange}>
+            <option >Seleccione una provincia</option>
+            {provinces.map((province) => (
+              <option  key={province.abbreviation} value={province.name}>
+                {province.name}
+              </option>
+            ))}
+          </select>
+
+          
+          <label style={{fontWeight: 'bold'}}>Codigo Postal</label>
+          <input defaultValue={data && data.LoginUser.user.direccion.ciudad.cod_postal} type="text" placeholder="Codigo postal" name="cp" />
+          <label style={{fontWeight: 'bold'}}>Telefono</label>
+          <input defaultValue={data && data.LoginUser.user.direccion.telefono} type="text" placeholder="Telefono" name="phone" />
+          <label style={{fontWeight: 'bold'}}>Info adicional</label>
+          <input defaultValue={data && data.LoginUser.user.direccion.AgregarInfo} type="text" placeholder="Info" name="info" />
+          {error && <p style={{display: 'grid', justifyContent:'center', color:'red'}}>{error}</p>}
+          <button className='boton-pagar'>Pagar</button>
         </form>
       </div>
-        <div className="Information-buttons">
-          <div className="Information-back">
-            <Link to="/book/cart">
-              Regresar
-            </Link>
-          </div>
-          {/* <div className="Information-next">
-              <Link to=''><button type='submit' onClick={hanldeSumbit} >Continuar Compra</button> </Link>
-          </div> */}
-        </div>
+      <div className='reg'>
+        <Link  to="/book/cart">
+          Regresar
+        </Link>
       </div>
+    </div>
+
   )
 }

@@ -13,14 +13,20 @@ export function UserFormRegister ({ onSubmit, title }) {
   const email = useInputValue('')
   const password = useInputValue('')
   const [ error, setError ] = useState()
+  const [ errorCampos, setErrorCampos ] = useState()
+
   const [createUser, {data,loading}] = useMutation(REGISTER)
   
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    createUser({ variables: { nombre: name.value, email: email.value , password: password.value } }) 
-    .then(null)
-    .catch(err => setError(err.message))
+    if (name.value !== '' && email.value !== '' && password.value !== '') {
+      createUser({ variables: { nombre: name.value, email: email.value , password: password.value } }) 
+      .then(null)
+      .catch(err => setError(err.message))
+    } else {
+      setErrorCampos('Error, no puede haber campos vacios')
+    }
   }
  
   
@@ -38,6 +44,7 @@ export function UserFormRegister ({ onSubmit, title }) {
     <label className="label">Password</label>
     <input type="password" name="password"  className="input" {...password} disabled={loading}/>
     {error === 'Cannot return null for non-nullable field SendUser.user.' ? <p style={{display: 'grid', justifyContent:'center', color:'red'}}>Error, Usuario ya existente</p> : null}
+    {errorCampos && <p style={{display: 'grid', justifyContent:'center', color:'red'}}>{errorCampos}</p> }
     <button type="submit" className="submit" disabled={loading}>{title}</button>
   </form>
       

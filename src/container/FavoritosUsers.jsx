@@ -9,7 +9,6 @@ import { Favorito } from '../components/Favorito'
 export function FavoritosUsers() {
 
   const { isAuth } = useContext(userContext)
-
   const { data, loading } = useQuery(GET_FAVORITOS_USER, {
     variables: { tokenUser: isAuth }
   })

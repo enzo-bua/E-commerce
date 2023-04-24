@@ -4,14 +4,6 @@
   margin-left: 25%;
 }
 
-.Information-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-
-
 .Information h5 {
   display: grid;
   justify-content: center;
@@ -21,7 +13,7 @@
 
 
 
-.Information input {
+.Information input, select {
   background-color: white;
   border-radius: 8px;
   border: 1px solid rgb(165, 157, 157);
@@ -38,16 +30,21 @@
 
 }
 
-.Information-buttons {
-  margin: 10px 0 0 ;
-}
-.Information button {
+.boton-pagar {
   background-color:rgb(140, 140, 245);
+  width: 25%;
   color: white;
-  padding: 6px 24px;
   border-radius: 5px;
-  color: white;
-  border: black solid 1px;
+  margin-left: 70%;
+  margin-top: 10px;
+}
+
+.reg {
+  width: 10%;
+  margin-top: -25px;
+  border: solid 1px rgb(140, 140, 245);
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .Information button:hover {

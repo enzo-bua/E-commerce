@@ -1,0 +1,19 @@
+.add-comentarios {
+  border: solid 1px;
+  width: 50%;
+  margin-left: 25%;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.button-enviar {
+  margin-top: 20px;
+  margin-left: 68%;
+  margin-bottom: 10px;
+  width: 7%;
+  height: 30px;
+  background-color: rgb(222, 104, 220);
+  border-radius: 5px;
+  border-color: rgb(255, 107, 253);
+
+}

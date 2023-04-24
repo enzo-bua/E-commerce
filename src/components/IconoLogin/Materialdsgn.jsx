@@ -32,7 +32,7 @@ export function MaterialDesign() {
 
   return (
     <>
-            <Tooltip title="Open settings">
+            <Tooltip title="Cerrar sesión">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <FaUserAlt alt="Remy Sharp" src=""/>
               </IconButton>
@@ -53,7 +53,6 @@ export function MaterialDesign() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              < FaUserAlt size="30px" style={{display: 'flex', marginBottom: '10px', marginLeft: '8px'}}/>
               <button style={{background: 'transparent', border: 'none'}} onClick={handleCerrarSesion}><AiOutlineLogin size="35px" /></button>
 
             </Menu>
