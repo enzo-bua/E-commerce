@@ -1,3 +1,5 @@
+import { useContext } from "react"
+import { CountCartContext } from "../Context/countCart"
 
 export const inistialState = JSON.parse(window.localStorage.getItem('cart')) || []
 
@@ -12,8 +14,8 @@ export const updateLocalStorage = state => {
 }
 
 export const CartReducer = (state, action) => {
-
-
+const { count } = useContext(CountCartContext)
+console.log(1)
   const { type: actionType, payload: actionPayload  } = action 
   switch (actionType) {
     case CART_ACTION_TYPES.ADD_TO_CART: {
@@ -23,7 +25,7 @@ export const CartReducer = (state, action) => {
       if (productInCartIndex >= 0){
         const newState = structuredClone(state)
         if (newState[productInCartIndex].quantity < stock){
-          newState[productInCartIndex].quantity += 1
+          newState[productInCartIndex].quantity = parseInt(newState[productInCartIndex].quantity) + 1;
         }
         updateLocalStorage(newState)
         return newState
@@ -33,7 +35,7 @@ export const CartReducer = (state, action) => {
         ...state,
         {
           ...actionPayload[0], // product
-          quantity: 1
+          quantity: count
         }
       ]
       updateLocalStorage(newState)

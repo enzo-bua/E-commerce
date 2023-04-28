@@ -1,6 +1,7 @@
 import './index.css'
 
 export function Category ({ product }) {
+  
   return (
     <a href={`/category/${product.nombre}`}>
       <div className="container">

@@ -15,6 +15,7 @@ export function FavButton({ isbn  }) {
   const  [agregarFavoritos]  = useMutation(POST_FAVORITOS)
   const [deleteFavoritos] = useMutation(DELETE_FAVORITOS)
   const { data } = useQuery(GET_EXIST_FAVORITO, {
+    skip: !isAuth,
     variables: { tokenUser: isAuth, isbn: isbn}
   }) 
 

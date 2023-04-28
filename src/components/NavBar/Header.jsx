@@ -29,7 +29,6 @@ export function Header () {
 				<a href="/category">Categorias</a>
 
         <div className="div-section">
-          <a><IoMdNotifications className="notification"/></a>
           <a  href='/book/cart'><BsCart className="cart" /> {cart.length > 0 && <b className="Header-alert">{cart.length}</b>}</a>
           <a  href="/login"><FaUserAlt className="user"/></a>
         </div>
@@ -47,7 +46,6 @@ export function Header () {
 			</button>
 		</header>
 
-		{/* <SearchPoducts /> */}
 		</>
 		);
 }

@@ -23,7 +23,7 @@ export function Agregarcupon(props) {
     createCupon({
       variables: {codigo: buyer.codigo, descuento: parseFloat(buyer.descuento)}
     })
-    .then(null)
+    .then(window.location.reload(true))
     .catch(null)
     
   }

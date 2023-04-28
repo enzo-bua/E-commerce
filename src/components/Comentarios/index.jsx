@@ -11,6 +11,7 @@ import { DELETE_COMENTARIOS } from '../../hoc/Mutation/deleteComentario'
 export function Comentarios({ comentario, isbn }) {
   const { isAuth } = useContext(userContext)
   const { data } = useQuery(GET_COMENTARIOS_USER, {
+    skip: !isAuth,
     variables: {isbn: isbn, tokenUser: isAuth}
   })
 

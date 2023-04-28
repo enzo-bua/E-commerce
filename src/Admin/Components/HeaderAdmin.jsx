@@ -2,8 +2,8 @@ import { useContext, useRef } from "react";
 import { FaBars, FaTimes, FaUserAlt } from "react-icons/fa";
 import '../../components/NavBar/Header.css'
 import { userContext } from "../../Context/user";
-
-export function Header () {
+import { CgCloseO } from 'react-icons/cg'
+export function HeaderAdmin () {
 
 	const { removeAuth } = useContext(userContext)
 
@@ -21,13 +21,13 @@ export function Header () {
 			<a href="/"><h3 className="logo">ADMINISTRADOR</h3></a>
 			
 			<nav ref={navRef}>
-				<a style={{fontFamily:'monospace'}} href="/admin/productos">Productos</a>
+				<a style={{fontFamily:'monospace'}} href="/">Productos</a>
 				<a style={{fontFamily:'monospace'}} href="/admin/categorias">Categorias</a>
 				<a style={{fontFamily:'monospace'}} href="/admin/ventas">Ventas</a>
-				<a style={{fontFamily:'monospace'}} href="/admin/user">AgregarAdmin</a>
+				<a style={{fontFamily:'monospace'}} href="/admin/user">Admin</a>
 				<a style={{fontFamily:'monospace'}} href="/admin/cupon">Cupon</a>
 
-				<a style={{fontFamily:'monospace'}} href="/" onClick={removeAuth}>Salir</a>
+				<a style={{fontFamily:'monospace'}} href="/" onClick={removeAuth}>Salir<CgCloseO /></a>
 
 
 				<button

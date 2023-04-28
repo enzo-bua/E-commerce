@@ -6,7 +6,6 @@ export function StartComponents({ isbn }) {
   const { data } = useQuery(GET_VALORACION, {
     variables: {isbn: isbn}
   })
-  console.log(data)
   const handleStart = () => {
     const total = data.getBook.book[0].valoracion.reduce((acc, curr) => acc + curr.cantidad_estrellas, 0);
     return total / data.getBook.book[0].valoracion.length

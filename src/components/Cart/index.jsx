@@ -8,6 +8,7 @@ import { POST_CUPON } from '../../hoc/Mutation/postCupon';
 import { useContext, useRef, useState } from 'react';
 import { userContext } from '../../Context/user';
 import { ToastContainer, toast } from 'react-toastify';
+import { POST_CART } from '../../hoc/Mutation/postCart';
 
 
 function CartItem ({product}) {
@@ -44,6 +45,9 @@ function CartItem ({product}) {
 }
 
 export function Cart () {
+
+  //cargo en el cart de la base de datos  
+  const [insertCart] = useMutation(POST_CART)
   const { isAuth } = useContext(userContext)
   const form = useRef()
   const [insertCupon, {data}] = useMutation(POST_CUPON)
@@ -79,17 +83,33 @@ export function Cart () {
       : sum
     return total.toFixed(2);
   }
+  
+
+  const handleCart = async () => {
+    try {
+      const promises = cart.map(product => (
+        insertCart({
+          variables: { isbn: product.isbn, cantidad: product.quantity, tokenUser: isAuth }
+        })
+      ));
+      await Promise.all(promises);
+    } catch (error) {
+      null
+    }
+  }
+
+
   return (
     <aside>
       <ToastContainer /> 
       <ul className='cart-map'>
         {
           cart.map(product => (
-            
             <CartItem key={product.isbn} product={product} />
             ))
         }
       </ul>
+
         <hr style={{marginTop: '-5px'}} />
         {
           cart.length > 0 
@@ -105,9 +125,9 @@ export function Cart () {
                   <input type="text" placeholder='Cupon de descuento' name='cupon' />
                   <button style={{marginLeft: '10px', borderRadius: '5px'}}>Agregar</button>
                 </form>
-                <Link to='/book/information'><button className='continuar-pedido'>Continuar Pedido</button></Link> 
+                <Link to='/book/information'><button className='continuar-pedido' onClick={handleCart}>Continuar Pedido</button></Link> 
               </div>
-        : <h5 style={{color: 'red', display: 'grid', justifyContent: 'center'}}>No hay libros en tu carrito!</h5>
+        : <h5 style={{height: '60vh' ,color: 'red', display: 'grid', justifyContent: 'center'}}>No hay libros en tu carrito!</h5>
         }
     </aside>          
   );         

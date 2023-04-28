@@ -49,9 +49,11 @@
 }
 .button-guardar {
   margin-left: 60%;
+  background-color: rgb(166, 42, 164);
 }
 
 .button-cancel {
   margin-left: 30px;
+  background-color: rgb(166, 42, 164);
 }
 

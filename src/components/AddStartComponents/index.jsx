@@ -10,6 +10,7 @@ export function AddStartsComponents({ isbn }) {
   const { isAuth } = useContext(userContext)
   const [insertValoracion] = useMutation(POST_VALORACION)
   const { data, loading } = useQuery(GET_VALORACION_USER,{
+    skip: !isAuth,
     variables: { isbn: isbn, tokenUser: isAuth }
   })
   const handleChange = (rating) => {

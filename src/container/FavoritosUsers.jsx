@@ -27,7 +27,7 @@ export function FavoritosUsers() {
               }
             </section>
           : 
-           <h5 style={{color: 'red', display: 'grid', justifyContent: 'center', marginTop: '1%' }}>No tienes libro Favoritos!</h5>
+           <h5 style={{height: '85vh' ,color: 'red', display: 'grid', justifyContent: 'center', marginTop: '1%', alignItems: 'center' }}>No tienes libro Favoritos!</h5>
       }
     </>
   )

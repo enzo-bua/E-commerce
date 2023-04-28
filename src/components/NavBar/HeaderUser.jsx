@@ -1,12 +1,9 @@
 import { useContext, useRef } from "react";
 import { FaBars, FaTimes, FaUserAlt } from "react-icons/fa";
 import { BsCart} from "react-icons/bs";
-import { IoMdNotifications } from "react-icons/io";
-import { Link } from "react-router-dom";
 import './Header.css'
 import { useCart } from "../../hooks/useCart";
 import { MaterialDesign } from "../IconoLogin/Materialdsgn";
-import { SearchPoducts } from './../SearchProducts/index'
 
 export function HeaderUser () {
 
@@ -33,7 +30,6 @@ export function HeaderUser () {
 				<a href="/favoritos">Favoritos</a>
 				<a href="/historial">Historial</a>
         <div className="div-section">
-          <a><IoMdNotifications className="notification"/></a>
           <a  href='/book/cart'><BsCart className="cart" /> {cart.length > 0 && <b className="Header-alert">{cart.length}</b>}</a>
           <MaterialDesign className="user"/>
         </div>
@@ -50,7 +46,6 @@ export function HeaderUser () {
 				<FaBars />
 			</button>
 		</header>
-		{/* <SearchPoducts /> */}
 		</>
 		);
 }

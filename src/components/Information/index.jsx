@@ -1,15 +1,22 @@
 import './index.css'
 import { useContext, useRef } from 'react' 
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
 import { DATA_USER } from '../../hoc/Mutation/postDataUser'
 import { userContext } from '../../Context/user'
 import { useState } from 'react'
 import { GET_INFORMATION } from '../../hoc/Query/getInformation'
+import { POST_COMPRA } from '../../hoc/Mutation/postCompra'
+import { DELETE_CART } from '../../hoc/Mutation/deleteCart'
+import { useCart } from '../../hooks/useCart'
 export function Information () {
 
   const { isAuth } = useContext(userContext)
   const form = useRef()
+  const { cart } = useCart()
+
+  const [deleteCart] = useMutation(DELETE_CART)
+  const [insertCompra, { data: dataCompra }] = useMutation(POST_COMPRA)
 
   const [dataUser] = useMutation(DATA_USER)
   const { data } = useQuery(GET_INFORMATION, {
@@ -48,7 +55,7 @@ export function Information () {
   }
   
 
-  const hanldeSumbit = (e) => {
+  const hanldeSumbitInfo = (e) => {
     e.preventDefault()
     const formData = new FormData(form.current)
   
@@ -93,11 +100,41 @@ export function Information () {
       setError('Por favor, complete todos los campos.')
     }
   }
+
+  const handleDeleteCart = async () => {
+    try {
+      const promises = cart.map(product => (
+        deleteCart({
+          variables: { isbn: product.isbn, tokenUser: isAuth }
+        })
+      ));
+      await Promise.all(promises);
+    } catch (error) {
+     console.log('error')
+    }
+  }
+
+
+  const handleRefresh = () => {
+    setTimeout(() => {
+      if (dataCompra) {
+        window.location.href = dataCompra.realizarCompra.init_p;
+      }
+    }, 2500);
+  };
+  const handleSubmitPago = () => {
+    insertCompra({
+      variables: { tokenUser: isAuth }
+    })
+    .then(handleRefresh())
+    .catch(error => console.log(error.message));
+  }
+
   return (
     <div className="Information">
       <h5>Complete con sus datos de envio: </h5>
       <div className="Information-form">
-        <form ref={form} onSubmit={hanldeSumbit}>
+        <form ref={form} onSubmit={hanldeSumbitInfo}>
           <label style={{fontWeight: 'bold'}}>Nombre</label>
           <input defaultValue={data && data.LoginUser.user.nombre} type="text" placeholder="Nombre completo" name="name" />
           <label style={{fontWeight: 'bold'}}>DNI</label>
@@ -125,14 +162,17 @@ export function Information () {
           <label style={{fontWeight: 'bold'}}>Info adicional</label>
           <input defaultValue={data && data.LoginUser.user.direccion.AgregarInfo} type="text" placeholder="Info" name="info" />
           {error && <p style={{display: 'grid', justifyContent:'center', color:'red'}}>{error}</p>}
-          <button className='boton-pagar'>Pagar</button>
+          <button className='boton-pagar' onClick={handleSubmitPago}>Pagar</button>
         </form>
       </div>
-      <div className='reg'>
-        <Link  to="/book/cart">
+        <div className='reg'> 
+
+      <button >
+        <Link onClick={handleDeleteCart}  to="/book/cart">
           Regresar
         </Link>
-      </div>
+      </button>
+        </div>
     </div>
 
   )

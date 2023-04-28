@@ -12,9 +12,9 @@ export function AddComentarios({ isbn }) {
   const [ createComentario ] = useMutation(POST_COMENTARIOS)
 
   const { data } = useQuery(GET_COMENTARIOS_USER, {
-    variables: {isbn: isbn, tokenUser: isAuth}
-  })
-
+    skip: !isAuth,
+    variables: { isbn, tokenUser: isAuth }
+  });
   
   const form = useRef()
   const [error, setError] = useState('')
@@ -42,13 +42,12 @@ export function AddComentarios({ isbn }) {
     }
   }
   
-  data && console.log(data.ExistComentario.comprado )
   return (
     // si compro el libro, evalua si ya comento o no, si ya comento muestra el parrafo, sino deja comentar
     data && data.ExistComentario.comprado && (
       data && data.ExistComentario.comentario 
         ? <p> Solo se permite un comentario, si desea modifique su comentario!</p>
-        :  <form ref={form} onSubmit={handleSubmit}> 
+        : <form ref={form} onSubmit={handleSubmit}> 
             <textarea className='add-comentarios' name='comentario'></textarea>
             {error && <p style={{display: 'grid', justifyContent:'center', color:'red'}}>{error}</p>}
             <button className='button-enviar'>Enviar</button>

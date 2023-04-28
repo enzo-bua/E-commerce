@@ -36,6 +36,7 @@ export function UserFormRegister ({ onSubmit, title }) {
  <form className="form"  onSubmit={handleSubmit} >
     {data && window.sessionStorage.setItem('token', data.registrarse.accessToken)}
     {data && onSubmit()}
+    {data &&  (window.location.href = '/') }
     <span className="title">{title}</span>
     <label className="label">Username</label>
     <input type="text" className="input" {...name} disabled={loading}/>

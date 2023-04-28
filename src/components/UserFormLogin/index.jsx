@@ -3,7 +3,6 @@ import { useInputValue } from '../../hooks/useInputValue'
 import { useQuery } from '@apollo/client'
 import { LOGIN } from '../../hoc/Query/getUser'
 import { useState } from 'react'
-import { LoginGoogle } from './OauthGoogle'
 
 
 export function UserFormLogin ({ onSubmit, title }) {
@@ -12,12 +11,10 @@ export function UserFormLogin ({ onSubmit, title }) {
   const [ error, setError ] = useState()
 
   const { data } = useQuery(LOGIN, {
-    variables: { email: email.value, password: password.value}
-  })
-
+    variables: { email: email.value, password: password.value }
+  });
   
   const handleSubmit = (e) => {
-    onSubmit
     e.preventDefault()
     if (data.LoginUser.accessToken === ''){
       setError('Error, Usuario no existente / no registrado')

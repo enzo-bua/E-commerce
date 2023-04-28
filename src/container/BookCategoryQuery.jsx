@@ -11,15 +11,18 @@ export function BookCategoryQuery() {
   )
 
   return (
-    <section className="container">
+    <div className="vh">
       {
         loading
         ? null
-        : data && data.getBook.book.map(product => (
+        : <section className="container">
+
+       { data && data.getBook.book.map(product => (
           <Product key={product.isbn} product={product} />
 
-        )) 
+        )) }
+        </section>
       }
-    </section>
+    </div>
   )
 }

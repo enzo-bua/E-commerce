@@ -13,18 +13,16 @@ export function ListHistorial() {
     variables: {tokenUser: isAuth}
   })
   return (
-    <>
-    {
-      loading 
-        ? <AiOutlineLoading3Quarters style={{marginLeft:'50%', marginTop: '30%'}} size='32px'/> 
-        : data && data.getBooksComprados.book.length > 0
-          ? <section className='container'>    
-              {data && data.getBooksComprados.book.map(product => (
-                <Historial key={product.isbn} product={product} />
-              )) }
-            </section>
-          : <h5 style={{color: 'red', display: 'grid', justifyContent: 'center', alignItems: 'center', marginTop: '1%' }}>No has comprado libros!</h5>
-    }
-  </>
+
+    loading 
+      ? <AiOutlineLoading3Quarters style={{marginLeft:'50%', marginTop: '30%'}} size='32px'/> 
+      : data && data.getBooksComprados.book.length > 0
+        ? <section className='container'>    
+            {data && data.getBooksComprados.book.map(product => (
+              <Historial key={product.isbn} product={product} />
+            )) }
+          </section>
+        : <h5 style={{height: '100vh' ,color: 'red', display: 'grid', justifyContent: 'center', alignItems: 'center', marginTop: '1%' }}>No has comprado libros!</h5>
+
   )
 }

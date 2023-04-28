@@ -4,13 +4,13 @@ import { BsFillCartCheckFill } from 'react-icons/bs'
 import { useCart } from '../../hooks/useCart'
 
 import { FavButton } from '../FavButton'
-import { useState } from 'react'
-import { Comentarios } from '../Comentarios'
 import { ComentariosQuery } from '../../container/ComentariosQuery'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { AddComentarios } from '../AddComentarios'
 import { StartComponents } from '../StartComponents'
+import { useContext } from 'react'
+import { CountCartContext } from '../../Context/countCart'
 
 export function TemplateLibro ({ product }) {
   const { cart, addToCart} = useCart()
@@ -19,12 +19,16 @@ export function TemplateLibro ({ product }) {
     toast.error('El producto ya esta en el carrito')
   }
 
-  const [count, setCount] = useState(1)
+  const {setCount} = useContext(CountCartContext)
 
   const handleNotify = () => {
     toast.success('Se agrego al carrito correctamente')
   }
-  
+  const handleInputChange = (event) => {
+    const newValue = event.target.value;
+    setCount(parseInt(newValue));
+  };
+
   return (
     <>
       <div className='book'>
@@ -76,8 +80,8 @@ export function TemplateLibro ({ product }) {
 
           <input 
             className='input-cantidad' 
-            defaultValue="1" 
-            onChange={(e) => {setCount(e.target.value)}} 
+            defaultValue="1"
+            onChange={handleInputChange} 
             type="number" 
             min='1' 
             max={product[0].stock} 
@@ -87,9 +91,9 @@ export function TemplateLibro ({ product }) {
       </div>
       <hr />
       <div className='comentarios'>
-        <strong>Comentarios</strong>
         <AddComentarios isbn={product[0].isbn}/>
         <ComentariosQuery  isbn={product[0].isbn}/>
+        
       </div>
   </>
   )

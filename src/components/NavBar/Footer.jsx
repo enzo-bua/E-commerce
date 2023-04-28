@@ -5,7 +5,7 @@ export function Footer() {
   const { cart } = useCart()
   return (
     <footer className={`foot grid grid-cols-1 justify-items-center mt-12 pt-6 pb-6 md:grid-cols-3 md:justify-items-center text-white bg-black relative z-50`}>
-      {/* <div className='desarrollo'>
+      <div className='desarrollo'>
         <h3 >Equipo de desarrollo</h3>
         <p>Bua Enzo -- Fronted</p>
         <p>Blanchet Nazareno -- Backend</p>
@@ -23,11 +23,9 @@ export function Footer() {
           <p> Email: libros@example.com</p>
           <p> Direccion: sarmiento111</p>
           <p> Teléfono: 11-444444</p>
-      </div> */}
+      </div>
 
-      {
-        JSON.stringify(cart, null, 2)
-      }
+ 
 
      </footer>
 

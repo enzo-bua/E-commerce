@@ -1,42 +1,66 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import './Modificar.css'
 import { POST_BOOK } from '../hoc/Mutation/PostBook'
-import { useMutation } from '@apollo/client'
-import { useNavigate } from 'react-router-dom'
+import { useMutation, useQuery } from '@apollo/client'
+import { GET_CATEGORY } from '../../hoc/Query/getCategorias'
 
 export function Carga(props) {
-  const [ dataBook, { data } ] = useMutation(POST_BOOK)
+  const [ dataBook ] = useMutation(POST_BOOK)
+
+  const { data } = useQuery(GET_CATEGORY)
+
   const form = useRef()
-  const navigate = useNavigate()
+
+  const [error, setError] = useState()
+
   //MODAL
   const onCancel = () =>{
     props.setOpenModalAñd(false);
   }  
 
-  const hanldeSumbit = () => {
-    
-    const formData = new FormData(form.current)
-    const buyer = {
-      'isbn': formData.get('isbn'),
-      'imagen': formData.get('imagen'),
-      'name': formData.get('name'),
-      'precio': formData.get('precio'),
-      'stock': formData.get('stock'),
-      'descripcion': formData.get('descripcion'),
-      'fechaIngreso': formData.get('fechaIngreso'),
-      'editorial': formData.get('editorial'),
-      'descuento': formData.get('descuento'),
-      'genero': formData.get('genero') ,
-      'autor': formData.get('autor')
-    }
-    dataBook({ 
-      variables: {isbn: buyer.isbn, imagen: buyer.imagen, nombre: buyer.name, precio: parseFloat(buyer.precio), 
-      stock :parseInt(buyer.stock), descripcion: buyer.descripcion, fechaIngreso: buyer.fechaIngreso, editorial: buyer.editorial,
-      descuento: parseFloat(buyer.descuento), genero: buyer.genero, autor: buyer.autor} 
-    })
+  
+  
+  const [selectedOption, setSelectedOption] = useState('')
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value)
+  }
 
-  .then(navigate('/'))
-  .catch(null)
+  const hanldeSumbit = (e) => {
+    e.preventDefault()
+    const formData = new FormData(form.current)
+    if (
+      formData.get('isbn') !== '' &&
+      formData.get('imagen') !== '' &&
+      formData.get('name') !== '' &&
+      formData.get('precio') !== '' &&
+      formData.get('stock') !== '' &&
+      formData.get('descripcion') !== '' &&
+      formData.get('editorial') !== '' &&
+      formData.get('descuento') !== '' &&
+      formData.get('autor') !== '' &&
+      selectedOption !== ''  && selectedOption !== 'Seleccione categoria' 
+    ) {
+      const buyer = {
+        'isbn': formData.get('isbn'),
+        'imagen': formData.get('imagen'),
+        'name': formData.get('name'),
+        'precio': formData.get('precio'),
+        'stock': formData.get('stock'),
+        'descripcion': formData.get('descripcion'),
+        'editorial': formData.get('editorial'),
+        'descuento': formData.get('descuento'),
+        'autor': formData.get('autor')
+      }
+      dataBook({ 
+        variables: {isbn: buyer.isbn, imagen: buyer.imagen, nombre: buyer.name, precio: parseFloat(buyer.precio), 
+        stock:parseFloat(buyer.stock), descripcion: buyer.descripcion, fechaIngreso: '', editorial: buyer.editorial,
+        descuento: parseFloat(buyer.descuento), genero: selectedOption, autor: buyer.autor} 
+      })
+    .then(window.location.reload(true))
+    .catch(null)
+    }else {
+      setError('Por favor, complete todos los campos.')
+    }
   }
   return (
     <div className='Information' >
@@ -54,17 +78,25 @@ export function Carga(props) {
         <label>Descripcion</label>
         <textarea placeholder='Ingrese descripcion' type="text" name="descripcion" />
         <label>Genero </label>
-        <input placeholder='Genero' type="text" name="genero" />
+        
+        <select id="select-options" value={selectedOption} onChange={handleChange}>
+        <option value="">Seleccione categoria</option>
+        {data && data.getGeneros.genero.map((option, index) => (
+          <option key={index} value={option.nombre}>
+            {option.nombre}
+          </option>
+        ))}
+      </select>
+
         <label>Precio </label>
-        <input placeholder='Precio' min="0" type="number" name="precio" />
+        <input placeholder='Precio' min="0" type="float" name="precio" />
         <label>Descuento </label>
-        <input placeholder='Ingrese descuento' min="0" type="number" name="descuento" />
-        <label>Fecha de Ingreso </label>
-        <input placeholder='Ingrese fecha de ingreso' type="text" name="fechaIngreso" />
+        <input placeholder='Ingrese descuento' min="0" max="100" type="number" name="descuento" />
         <label>Editorial </label>
         <input placeholder='Ingrese editorial' type="text" name="editorial" />
         <label>Imagen</label>
         <input placeholder='Ingrese imagen (https://...)' className='file' type="text" name='imagen' />
+        {error && <p style={{display: 'grid', justifyContent:'center', color:'white', fontWeight: 'bold'}}>{error}</p>}
         <button className='button-guardar' type='submite'>Guardar</button>
         <button className='button-cancel' type='button' onClick={onCancel}>Cancelar</button>
       </form>

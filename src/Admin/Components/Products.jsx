@@ -3,15 +3,27 @@ import { AiOutlineLoading3Quarters,AiOutlineDelete } from 'react-icons/ai'
 import './index.css'
 import { BsPencil } from 'react-icons/bs'
 import { Modal } from '../../Modal'
-import { Modificar } from './Modificar'
 import { Carga } from './Carga'
-import { Link, Route, Routes } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useMutation } from '@apollo/client'
+import { DELETE_BOOK } from '../hoc/Mutation/DeleteBook'
+import { Modificar } from './modificar'
 
-export function Products({ data, loading }) {
+export function Products({ products, loading }) {
+  const [deleteBook] = useMutation(DELETE_BOOK)
   const [openModalMod, setOpenModalMod] = useState(false)
   const [openModalAñd, setOpenModalAñd] = useState(false)
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState(false)
+
+
+  const handleDeleteBook = (isbn) => {
+    deleteBook({
+      variables: { isbn: isbn }
+    })
+    .then(location.reload(true))
+    .catch(null)
+  }
 
   const handleModalMod = () => {
     setOpenModalMod(prevState => !prevState)
@@ -30,8 +42,10 @@ export function Products({ data, loading }) {
     setSort(!sort)
   }
   
-  const results = !search ? data.getBook.book : data.getBook.book.filter((dato)=> dato.isbn === search)
-
+  const results = search 
+  ? products.filter((product) => product.isbn.includes(search))
+  : products;
+  
   const sortedProducts = useMemo(() => {
     return sort 
       ? [...results].sort((a, b) => a.nombre.localeCompare(b.nombre))
@@ -78,22 +92,22 @@ export function Products({ data, loading }) {
                     
                   <tr key={product.isbn}>
                         <td><img className='imagen' src={product.url_imagen} alt="" /></td>
-                        <td data-title='Nombre: '>{product.nombre}</td>
-                          <td data-title='Isbn: '>{product.isbn}</td>
-                          <td data-title='Autor: '>.</td>
-                          <td data-title='Stock: '>{product.stock}</td>
-                          <td data-title='Descripcion: '>{product.descripcion.slice(0, 150)}</td>
-                          {/* <td data-title='Genero: '>{product.genero[0].nombre}</td> */}
-                          <td data-title='$ '>{product.precio}</td>
-                          <td data-title='Descuento: '>{product.descuento}</td>
-                          <td data-title='Editorial: '>{product.editorial.nombre}</td>
+                        <td >{product.nombre}</td>
+                          <td >{product.isbn}</td>
+                          <td >{product.autor[0].nombre}</td>
+                          <td >{product.stock}</td>
+                          <td >{product.descripcion.slice(0, 150)}</td>
+                          <td >{product.genero[0].nombre}</td>
+                          <td >{product.precio}</td>
+                          <td >{product.descuento}</td>
+                          <td >{product.editorial.nombre}</td>
                           <td className='td-option'>
                             <div className="option">
-                              <Link to={`/edit/${product.isbn}`} className='pencil'  onClick={handleModalMod}>
+                              <button><Link  to={`/${product.isbn}`}  onClick={handleModalMod}>
                                 <BsPencil />
-                              </Link>
-                              <button className='trash'>
-                                <AiOutlineDelete />
+                              </Link></button>
+                              <button className='trash'  onClick={() => handleDeleteBook(product.isbn)}>
+                                <AiOutlineDelete  size="20px"/>
                               </button>
                             </div>
                           </td>
@@ -112,19 +126,11 @@ export function Products({ data, loading }) {
               <Carga
                 setOpenModalAñd={setOpenModalAñd}
               />
-  
             </Modal>
           )}
         {!!openModalMod && (
           <Modal>
-            
-      
-            <Routes>
-              <Route path="edit/:isbn" element={ <Modificar setOpenModalMod={setOpenModalMod}/>}/>
-            </Routes>
-
-           
-  
+             <Modificar setOpenModalMod={setOpenModalMod}/>  
           </Modal>
         )}
   

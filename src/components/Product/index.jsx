@@ -17,7 +17,7 @@ export function Product ({ product }) {
                     <br />
                     <span style={{display: 'inline-block', marginLeft:'10px', color: 'red'}}>{product.descuento}% OFF</span>
                   </p>
-                  <p className='precio-descuento'>$ {product.precio - (product.precio * product.descuento / 100).toFixed(2)}</p>
+                  <p className='precio-descuento'>$ {parseFloat(product.precio - (product.precio * product.descuento / 100)).toFixed(2)}</p>
                 </>
           }
         </div>

@@ -5,8 +5,7 @@ import { Products } from '../Components/Products'
 
 export function HomeProducts() {
   const { data, loading } = useQuery(GET_PRODUCTS_ALL)
-
   return (
-    data && <Products data={data} loading={loading}/>
+    data && <Products products={data.getBook.book} loading={loading}/>
     )
 }

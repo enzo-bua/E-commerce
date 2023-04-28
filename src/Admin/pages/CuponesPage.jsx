@@ -5,7 +5,7 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 import { GET_CUPON } from '../hoc/Query/getCupon'
 import { Cupon } from '../Components/Cupon'
 
-export  function Cupones() {
+export  function CuponesPage() {
   const {data, loading} = useQuery(GET_CUPON)
   return (
     loading 

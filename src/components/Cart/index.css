@@ -13,6 +13,9 @@
 
 }
 
+.vh {
+height: 70vh;}
+
 
 .cart-container img{
   width: 30%;
@@ -54,7 +57,7 @@
   height: 180px;
   border: solid 1px black;
   margin-left: 35%;
-  margin-bottom: 20px;
+  margin-bottom: 100px;
   
 }
 

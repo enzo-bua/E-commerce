@@ -1,20 +1,25 @@
 import React, { useState ,useMemo } from 'react'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
-import './index.css'
-export function Ventas({ products }) {
-
+export function Ventas({ products, loading }) {
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState(false)
 
   const handleSort = () => {
     setSort(!sort)
   }
+  
+  const hanldeChange = (e) => {
+    const newSearch = e.target.value 
+    setSearch(newSearch)
+  }
 
-  const results = !search ? data.getBook.book : data.getBook.book.filter((dato)=> dato.isbn === search)
+  const results = search 
+  ? products.filter((product) => product.fecha.includes(search))
+  : products;
 
   const sortedProducts = useMemo(() => {
     return sort 
-      ? [...results].sort((a, b) => a.nombre.localeCompare(b.nombre))
+      ? [...results].sort((a, b) => a.fecha.localeCompare(b.fecha))
       : results
   }, [sort, results])
 
@@ -22,42 +27,30 @@ export function Ventas({ products }) {
     <>
       {
         loading 
-        ? <AiOutlineLoading3Quarters style={{marginLeft:'50%', marginTop: '30%'}} size='32px'/> 
+        ? <AiOutlineLoading3Quarters style={{marginLeft:'50%', marginTop: '30%', marginBottom: '100%'}} size='32px'/> 
           : 
           <>
-          <input value={search} onChange={hanldeChange} type="text"  placeholder='INGRESE ISBN ...' />
-           <table>
+          <input style={{marginLeft: '40%', marginTop:'5%', width: '20%', textAlign:'center', height: '40px', borderRadius:'5px'}} value={search} onChange={hanldeChange} type="text"  placeholder='INGRESE FECHA (dd/mm/aa)' />
+           <table style={{marginLeft:'25%', width:'50%', textAlign:'start', marginTop: '30px'}}>
               <thead>
                 <tr>
-                  <th>imagen</th>
                   <th>
                     <input style={{marginRight:'5px', cursor:'pointer'}} type="checkbox" onChange={handleSort} checked={sort}/>
-                    Nombre
+                    Fecha
                     </th>
-                  <th>Isbn</th>
-                  <th>Autor</th>
-                  <th>Stock</th>
-                  <th>Descripcion</th>
-                  <th>Genero</th>
-                  <th>Precio</th>
-                  <th>Descuento</th>
-                  <th>Editorial</th>
+                  <th>Nombre</th>
+                  <th>Cantidad</th>
+                  <th>Monto</th>
                 </tr>
               </thead> 
               <tbody>
-                {sortedProducts.map((product) => (
+                {sortedProducts.map((product, index) => (
                     
-                  <tr key={product.isbn}>
-                        <td><img className='imagen' src={product.url_imagen} alt="" /></td>
-                        <td data-title='Nombre: '>{product.nombre}</td>
-                          <td data-title='Isbn: '>{product.isbn}</td>
-                          <td data-title='Autor: '>{product.autor[0].nombre }</td>
-                          <td data-title='Stock: '>{product.stock}</td>
-                          <td data-title='Descripcion: '>{product.descripcion.slice(0, 150)}</td>
-                          <td data-title='Genero: '>{product.genero[0].nombre}</td>
-                          <td data-title='$ '>{product.precio}</td>
-                          <td data-title='Descuento: '>{product.descuento}</td>
-                          <td data-title='Editorial: '>{product.editorial.nombre}</td>
+                  <tr key={index}>
+                        <td >{product.fecha}</td>
+                        <td >{product.factura_detalle[0].book.nombre}</td>
+                        <td >{product.factura_detalle[0].cantidad }</td>
+                        <td >{product.monto}</td>
                     </tr>
                     
                     )) 
