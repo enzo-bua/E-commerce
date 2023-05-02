@@ -88,3 +88,8 @@
   color:  rgb(140, 140, 245);
 }
 
+.olvide-password {
+  display: grid;
+  justify-content: center;
+  color: blue;
+}

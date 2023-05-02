@@ -5,9 +5,12 @@ import { REGISTER } from '../../hoc/Mutation/postRegister'
 import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { LoginGoogle } from '../UserFormLogin/OauthGoogle';
+import { useContext } from 'react';
 
 
 export function UserFormRegister ({ onSubmit, title }) {
+
 
   const name = useInputValue('')
   const email = useInputValue('')
@@ -28,12 +31,9 @@ export function UserFormRegister ({ onSubmit, title }) {
       setErrorCampos('Error, no puede haber campos vacios')
     }
   }
- 
-  
 
   return (
-    <>    
- <form className="form"  onSubmit={handleSubmit} >
+  <form className="form"  onSubmit={handleSubmit} >
     {data && window.sessionStorage.setItem('token', data.registrarse.accessToken)}
     {data && onSubmit()}
     {data &&  (window.location.href = '/') }
@@ -46,9 +46,8 @@ export function UserFormRegister ({ onSubmit, title }) {
     <input type="password" name="password"  className="input" {...password} disabled={loading}/>
     {error === 'Cannot return null for non-nullable field SendUser.user.' ? <p style={{display: 'grid', justifyContent:'center', color:'red'}}>Error, Usuario ya existente</p> : null}
     {errorCampos && <p style={{display: 'grid', justifyContent:'center', color:'red'}}>{errorCampos}</p> }
-    <button type="submit" className="submit" disabled={loading}>{title}</button>
-  </form>
-      
-    </>
+    <button style={{marginBottom:'10px'}} type="submit" className="submit" disabled={loading}>{title}</button>
+    <LoginGoogle />
+    </form>
   )
 }

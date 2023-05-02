@@ -151,7 +151,8 @@ hr{
   }
   
   .favoritos-button {
-    margin-left: 400px;
+    margin-left: 300px;
+    margin-top: 20px;
     background-color: transparent;
     border: none;
   }

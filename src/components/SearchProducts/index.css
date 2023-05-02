@@ -24,3 +24,12 @@
 .searchBar input:focus{
   border-bottom: 2px rgb(133, 133, 245) solid;
 }
+@media only screen and  ((min-width: 350px) and (max-width: 1024px)) {
+
+  .searchBar input{
+    display: grid;
+    justify-content: center;
+    margin-left: -5%;
+  }
+
+}

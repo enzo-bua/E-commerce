@@ -15,18 +15,15 @@ const client = new ApolloClient({
   })
 })
 
-const clientId = '753481888026-pu665d1aj3henv299f7v8nlo84bgc81o.apps.googleusercontent.com'
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <userContext.Provider>
     <ApolloProvider client={client}> 
     <BrowserRouter>
       <FiltersProvider>
         <CountCart>
-
-        <GoogleOAuthProvider clientId={clientId}>
-          <App  />
-        </GoogleOAuthProvider>
+          <GoogleOAuthProvider clientId='1013528538582-rgdspt2m2vqct6hrtj7e3s3m9r587gnq.apps.googleusercontent.com'>
+            <App  />
+          </GoogleOAuthProvider>
         </CountCart>
       </FiltersProvider>
       </BrowserRouter>

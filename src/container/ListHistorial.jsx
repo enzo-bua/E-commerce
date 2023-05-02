@@ -17,7 +17,7 @@ export function ListHistorial() {
     loading 
       ? <AiOutlineLoading3Quarters style={{marginLeft:'50%', marginTop: '30%'}} size='32px'/> 
       : data && data.getBooksComprados.book.length > 0
-        ? <section className='container'>    
+        ? <section style={{height: '80vh'}} className='container'>    
             {data && data.getBooksComprados.book.map(product => (
               <Historial key={product.isbn} product={product} />
             )) }

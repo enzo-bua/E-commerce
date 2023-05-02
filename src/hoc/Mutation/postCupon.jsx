@@ -8,6 +8,7 @@ export const POST_CUPON = gql`
       cupon {
         cantidad_descuento
       }
+      
     }
   }
 `

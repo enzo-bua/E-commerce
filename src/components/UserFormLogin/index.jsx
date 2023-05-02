@@ -3,6 +3,7 @@ import { useInputValue } from '../../hooks/useInputValue'
 import { useQuery } from '@apollo/client'
 import { LOGIN } from '../../hoc/Query/getUser'
 import { useState } from 'react'
+import { LoginGoogle } from './OauthGoogle'
 
 
 export function UserFormLogin ({ onSubmit, title }) {
@@ -27,8 +28,6 @@ export function UserFormLogin ({ onSubmit, title }) {
  
   
   return (
-    <>    
-
   <form className="form-login" onSubmit={handleSubmit}>
     <span className="title">{title}</span>
     <label  className="label">Email</label>
@@ -37,10 +36,8 @@ export function UserFormLogin ({ onSubmit, title }) {
     <input type="password" name="password"  className="input" {...password}/>
     {error && <p style={{display: 'grid', justifyContent:'center', color:'red', fontSize: '0.9em'}}>{error}</p>}
     <button type="submit" className="submit">{title}</button>
+    <a className='olvide-password' href="">Olvidé mi contraseña</a>
+    <LoginGoogle />
   </form>
-
-  {/* <LoginGoogle /> */}
-      
-    </>
   )
 }

@@ -29,7 +29,7 @@ function CartItem ({product}) {
                     <br />
                     <span style={{display: 'inline-block', marginLeft:'10px', color: 'red'}}>{product.descuento}% OFF</span>
                   </p>
-                  <p className='precio-descuento'>$ {product.precio - (product.precio * product.descuento / 100).toFixed(2)}</p>
+                  <p className='precio-descuento'>$ {parseFloat(product.precio - (product.precio * product.descuento / 100)).toFixed(2)}</p>
                 </>
           }
           <div className='cantidad'>
@@ -97,10 +97,11 @@ export function Cart () {
       null
     }
   }
-
+ 
 
   return (
     <aside>
+
       <ToastContainer /> 
       <ul className='cart-map'>
         {
@@ -127,7 +128,7 @@ export function Cart () {
                 </form>
                 <Link to='/book/information'><button className='continuar-pedido' onClick={handleCart}>Continuar Pedido</button></Link> 
               </div>
-        : <h5 style={{height: '60vh' ,color: 'red', display: 'grid', justifyContent: 'center'}}>No hay libros en tu carrito!</h5>
+        : <h5 style={{height: '80vh' ,color: 'red', display: 'grid', justifyContent: 'center'}}>No hay libros en tu carrito!</h5>
         }
     </aside>          
   );         
