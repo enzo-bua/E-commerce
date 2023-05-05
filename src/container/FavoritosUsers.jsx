@@ -16,18 +16,14 @@ export function FavoritosUsers() {
     <>
       {
         data &&  data.getFavoritos.favoritos.length > 0
-        ? <section className='container'>
-              { 
-                loading
-                  ? <AiOutlineLoading3Quarters style={{marginLeft:'50%', marginTop: '30%'}} size='32px'/> 
-                  : 
-                    data && data.getFavoritos.favoritos.map(product => (
-                      <Favorito key={product.books.isbn} product={product.books} />
-                    )) 
-              }
-            </section>
-          : 
-           <h5 style={{height: '85vh' ,color: 'red', display: 'grid', justifyContent: 'center', marginTop: '1%', alignItems: 'center' }}>No tienes libro Favoritos!</h5>
+        ? loading
+            ? <AiOutlineLoading3Quarters style={{marginLeft:'50%', marginTop: '30%'}} size='32px'/> 
+            : < section style={{height: '80vh'}} className='container'>
+                {data && data.getFavoritos.favoritos.map(product => (
+                  <Favorito key={product.books.isbn} product={product.books} />
+                )) }
+              </section>  
+          : <h5 style={{height: '85vh' ,color: 'red', display: 'grid', justifyContent: 'center', marginTop: '1%', alignItems: 'center' }}>No tienes libro Favoritos!</h5>
       }
     </>
   )

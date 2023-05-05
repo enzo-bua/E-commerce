@@ -59,7 +59,11 @@ export function TemplateLibro ({ product }) {
           <p className='decripcion'>{product[0].descripcion}</p>
           <p>ISBN: {product[0].isbn}</p>
           <p>Editorial: {product[0].editorial.nombre}</p>
-          <p>Categoría: {product[0].genero[0].nombre}</p>
+          {
+            product[0].genero.length > 0
+              ? <p>Categoría: {product[0].genero[0].nombre}</p>
+              : <p>Categoría: Sin genero</p>
+          }
           <p>Stock diponible: {product[0].stock}</p>
 
           

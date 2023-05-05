@@ -27,6 +27,7 @@ export function Comentarios({ comentario, isbn }) {
     }, 2500);
   }
 
+  //create comentario
   const handleSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData(form.current)
@@ -44,14 +45,13 @@ export function Comentarios({ comentario, isbn }) {
     }
   }
 
+  // delete comentario 
   const handleDelete = () => {
-    const coment = data && data.ExistComentario.id_user == comentario.users.id
-      ? comentario.opinion
-      : null
-      console.log(coment.substring(0, coment.length - 2))
-      deleteComentario({
-          variables: { coment: coment.substring(0, coment.length - 2), isbn: isbn, tokenUser: isAuth }
-        })
+    deleteComentario({
+      variables: { isbn: isbn, tokenUser: isAuth }
+    })
+    .then(toast.success('Comentario eliminado con éxito'))
+    .catch(null)
   }
       
   const [edit, setEdit] = useState(true)

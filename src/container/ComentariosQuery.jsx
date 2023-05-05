@@ -7,8 +7,8 @@ export  function ComentariosQuery({ isbn }) {
     variables: { isbn: isbn}
   })
   return (
-    data && data.getBook.book[0].opiniones.map((comen) => (
-      <Comentarios comentario={comen} isbn={isbn} />
+    data && data.getBook.book[0].opiniones.map((comen, index) => (
+      <Comentarios key={index} comentario={comen} isbn={isbn} />
     )) 
   )
 }

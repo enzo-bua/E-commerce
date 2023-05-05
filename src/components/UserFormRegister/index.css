@@ -4,6 +4,9 @@
   display: flex;
   margin-top: 5%;
 }
+.div-container {
+  height: 85vh;
+}
 
 .form {
   margin-left: 15%;
@@ -92,4 +95,33 @@
   display: grid;
   justify-content: center;
   color: blue;
+}
+
+@media only screen and  ((min-width: 350px) and (max-width: 1024px)) {
+  .div {
+    display: grid; 
+  }
+  .div-container {
+    height: 120vh;
+  }
+
+  .form {
+    margin-left: 10%;
+  }
+
+  .form-login {
+    margin-left: 10%;
+    margin-bottom: 40px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  .label {
+   font-size: 1em;
+  }
+  .titulo-bienvenido {
+    font-size: 1.5em;
+  }
+
 }

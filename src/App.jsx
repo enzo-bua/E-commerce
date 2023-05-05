@@ -23,7 +23,8 @@ import { CategoryPage } from "./Admin/pages/CategoryPage";
 import { HeaderAdmin } from "./Admin/Components/HeaderAdmin";
 import { CuponesPage } from "./Admin/pages/CuponesPage";
 import { LayoutUser } from "./components/NavBar/LayoutUser";
-import RecuperarPassword from "./components/RecuperarPassword";
+import { InfoUser } from "./components/InfoUser";
+import { RecoveryPassword } from "./components/RecoveryPassword";
 function App() {
 
   const { isAuth } = useContext(userContext)
@@ -40,17 +41,17 @@ function App() {
           ? null
           : data !== undefined 
             ? data && data.LoginUser.user.es_admin === true   //si es admin 
-              ?     <>
-              <HeaderAdmin />
-              <Routes>
-                <></>
-                <Route path="/:isbn?" element={<HomeProducts />}/>
-                <Route path="/admin/user" element={<UsersAdmin/>}/>
-                <Route path="/admin/categorias" element={<CategoryPage/>}/>
-                <Route path='/admin/ventas' element={<PageVentas />}/>
-                <Route path='/admin/cupon' element={<CuponesPage />}/>
-              </Routes>
-              </>
+              ? <>
+                  <HeaderAdmin />
+                  <Routes>
+                    <></>
+                    <Route path="/:isbn?" element={<HomeProducts />}/>
+                    <Route path="/admin/user" element={<UsersAdmin/>}/>
+                    <Route path="/admin/categorias" element={<CategoryPage/>}/>
+                    <Route path='/admin/ventas' element={<PageVentas />}/>
+                    <Route path='/admin/cupon' element={<CuponesPage />}/>
+                  </Routes>
+                </>
               :<LayoutUser>
                  {/* si esta logueado */}
                   <Routes>
@@ -62,7 +63,7 @@ function App() {
                     <Route path="/category/:genero" element={<BookCategoryQuery />}/>
                     <Route path="/historial" element={<HistorialPage />}/>
                     <Route path="/favoritos" element={<Favoritos />}/>
-                    <Route path="/user" element={<RecuperarPassword />}/>
+                    <Route path="/user" element={<InfoUser />}/>
                   </Routes>
                 </LayoutUser>
             : <Layout> 
@@ -76,6 +77,7 @@ function App() {
                   <Route path="/login" element={<NotRegisterUser />}/>
                   <Route path="/historial" element={<NotRegisterUser />}/>
                   <Route path="/book/cart" element={<NotRegisterUser />}/>
+                  <Route path="/recoveryPassword" element={<RecoveryPassword />}/>
                 </Routes>
               </Layout> 
 

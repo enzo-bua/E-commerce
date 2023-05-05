@@ -36,7 +36,7 @@ export function UserFormLogin ({ onSubmit, title }) {
     <input type="password" name="password"  className="input" {...password}/>
     {error && <p style={{display: 'grid', justifyContent:'center', color:'red', fontSize: '0.9em'}}>{error}</p>}
     <button type="submit" className="submit">{title}</button>
-    <a className='olvide-password' href="">Olvidé mi contraseña</a>
+    <a className='olvide-password' href="/recoveryPassword">Olvidé mi contraseña</a>
     <LoginGoogle />
   </form>
   )

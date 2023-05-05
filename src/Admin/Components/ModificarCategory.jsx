@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import './modificar'
+import './modificar.css'
 import { UPDATE_CATEGORY } from '../hoc/Mutation/UpdateCategory'
 import { useMutation } from '@apollo/client'
 export function ModificarCategory({ setIsOpen, product }) {

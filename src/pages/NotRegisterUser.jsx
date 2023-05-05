@@ -15,7 +15,7 @@ export function NotRegisterUser() {
     navigate('/')
   }
   return (
-    <div style={{height: '85vh'}}>
+    <div className='div-container'>
       <h4 className='titulo-bienvenido'>Bienvenidos a Books Shop</h4>
       <div className='div'>
         <UserFormLogin title='Login' onSubmit={activateAuth}/>

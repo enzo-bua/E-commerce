@@ -7,7 +7,6 @@
   transform: all 0.25s;
   background-color: #faf9f9;
   margin-top: 70px;
-  white-space: nowrap;
 }
 
 .name{
@@ -21,14 +20,7 @@
   width:100px;
 
 }
-.card-data-autor{
-  margin-left: 20px;
-}
 
-a{
-  text-decoration: none;
-  color: black;
-}
 
 .card:hover {
   border: 1px solid black;
@@ -60,3 +52,4 @@ a{
   justify-content: center;
   margin-top: 5px;
 }
+

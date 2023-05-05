@@ -23,3 +23,11 @@
   height: 40px;
   margin-left: 35%;
 }
+
+@media only screen and  ((min-width: 350px) and (max-width: 1024px)) {
+  .rec-button {
+    width: 50%;
+    height: 40px;
+    margin-left: 25%;
+  }
+}

@@ -15,7 +15,6 @@ export const updateLocalStorage = state => {
 
 export const CartReducer = (state, action) => {
 const { count } = useContext(CountCartContext)
-console.log(1)
   const { type: actionType, payload: actionPayload  } = action 
   switch (actionType) {
     case CART_ACTION_TYPES.ADD_TO_CART: {
@@ -55,7 +54,7 @@ console.log(1)
       //producto esta en el carrito
       if (productInCartIndex >= 0){
         const newState = structuredClone(state)
-        if (newState[productInCartIndex].quantity  > 0){
+        if (newState[productInCartIndex].quantity  > 1){
         newState[productInCartIndex].quantity -= 1
         }
         if (newState[productInCartIndex].quantity === 0){

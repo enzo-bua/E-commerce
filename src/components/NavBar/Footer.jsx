@@ -16,7 +16,7 @@ export function Footer() {
         <h3>Enlaces Útiles</h3>
         <p>Sobre nosotros</p>
         <p>Politicas de uso</p>
-        <p>Contactate con nosotros</p>
+        <p className='contactate'>Contactate con nosotros</p>
       </div>
       <div className='informacion'>
         <h3>Información de Contacto</h3>

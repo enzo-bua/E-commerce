@@ -89,7 +89,6 @@ export function Products({ products, loading }) {
                 </thead> 
               <tbody>
                 {sortedProducts.map((product) => (
-                    
                   <tr key={product.isbn}>
                         <td><img className='imagen' src={product.url_imagen} alt="" /></td>
                         <td >{product.nombre}</td>
@@ -97,7 +96,11 @@ export function Products({ products, loading }) {
                           <td >{product.autor[0].nombre}</td>
                           <td >{product.stock}</td>
                           <td >{product.descripcion.slice(0, 150)}</td>
-                          <td >{product.genero[0].nombre}</td>
+                          {
+                            product.genero.length > 0
+                            ? <td >{product.genero[0].nombre}</td>
+                            : <td>Sin genero</td>
+                          }
                           <td >{product.precio}</td>
                           <td >{product.descuento}</td>
                           <td >{product.editorial.nombre}</td>

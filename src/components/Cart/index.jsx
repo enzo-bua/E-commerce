@@ -9,10 +9,28 @@ import { useContext, useRef, useState } from 'react';
 import { userContext } from '../../Context/user';
 import { ToastContainer, toast } from 'react-toastify';
 import { POST_CART } from '../../hoc/Mutation/postCart';
+import { DELETE_CART } from '../../hoc/Mutation/deleteCart';
 
 
 function CartItem ({product}) {
-  const { addToCart, removeFromCart, clearCart} = useCart() 
+  const { cart, addToCart, removeFromCart, clearCart} = useCart() 
+
+  const { isAuth } = useContext(userContext)
+  const [deleteCart] = useMutation(DELETE_CART)
+
+  //limpio el carrito de la bd
+  const handleDeleteCart = async () => {
+    try {
+      const promises = cart.map(product => (
+        deleteCart({
+          variables: { isbn: product.isbn, tokenUser: isAuth }
+        })
+      ));
+      await Promise.all(promises);
+    } catch (error) {
+     console.log('error')
+    }
+  }
 
   return (
       <div className='cart-container '>
@@ -36,7 +54,7 @@ function CartItem ({product}) {
             <button className='increment' onClick={() =>addToCart(product)}>+</button>
             <p>{product.quantity}</p>
             <button className='decrement' onClick={() => clearCart(product)}>-</button>
-            <button className='delate' onClick={() => removeFromCart(product)}><FaTrash size='20px'/> </button>
+            <button className='delate' onClick={() => {removeFromCart(product); handleDeleteCart()}}><FaTrash size='20px'/> </button>
           </div>
           </div>
 
@@ -54,13 +72,14 @@ export function Cart () {
 
 
   const { cart} = useCart()
+  //cantidad de libro a comprar
   const hanldeCantidadLibros = () => {
     const reducer = (accumulator, currentValue) => accumulator + currentValue.quantity
     const sum = cart.reduce(reducer,0)
     return sum
   }
 
-  
+  //inserto cupon
   const handleSubmitCupon = (e) => {
     e.preventDefault()
     const formData = new FormData(form.current)
@@ -75,6 +94,7 @@ export function Cart () {
     .catch(error => toast.error('Cupon no existente'))
   }
   
+  //total a pagar
   const handleSumTotal = () => {
     const reducer = (accumulator, currentValue) => accumulator + (currentValue.precio - (currentValue.precio * currentValue.descuento / 100)) * currentValue.quantity
     const sum = cart.reduce(reducer, 0)
@@ -84,7 +104,7 @@ export function Cart () {
     return total.toFixed(2);
   }
   
-
+  //agrego los libros al cart de la bd
   const handleCart = async () => {
     try {
       const promises = cart.map(product => (
@@ -100,7 +120,7 @@ export function Cart () {
  
 
   return (
-    <aside>
+    <aside className='aside'>
 
       <ToastContainer /> 
       <ul className='cart-map'>

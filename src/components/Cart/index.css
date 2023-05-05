@@ -162,6 +162,10 @@ height: 70vh;}
     margin-left: 27%;
     border-radius: 5px;
   }
+
+  .aside {
+    height: 90vh;
+  }
   
   
 }

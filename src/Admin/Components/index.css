@@ -114,14 +114,12 @@ th {
 @media only screen and  ((min-width: 350px) and (max-width: 1024px)) {
 
   table {
-    width: 70%;
+    width:80%;
     margin-top: 110px;
-    margin-left: -14%;
+    margin-left: 1%;
     overflow-y: scroll;
   }
-  td {
-    border: none;
-  }
+
 
   table tr {
     display: flex;
@@ -141,9 +139,8 @@ th {
  
 
   .imagen {
-    height: 250px;
-    width: 50%;
+    height: 150px;
+    width: 20%;
     margin-left: 113px;  }
-
 
 }

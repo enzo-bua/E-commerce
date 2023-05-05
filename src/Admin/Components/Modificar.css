@@ -57,3 +57,16 @@
   background-color: rgb(166, 42, 164);
 }
 
+@media only screen and  ((min-width: 350px) and (max-width: 1024px)) {
+  .button-guardar {
+    margin-left: 60%;
+    background-color: rgb(166, 42, 164);
+    margin-bottom: -200px;
+  }
+  
+  .button-cancel {
+    margin-top: -100px;
+    margin-left: 30px;
+    background-color: rgb(166, 42, 164);
+  }
+}

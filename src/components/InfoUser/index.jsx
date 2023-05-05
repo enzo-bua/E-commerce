@@ -48,19 +48,19 @@ export function Form ({ SetIsOpen, isAuth }) {
         >
         <AiOutlineClose size="22px" />
       </button>
-    <h5>Cambiar contraseña</h5>
-    <div className='Information-form'>
-      <form ref={form} onSubmit={handleSubmit}>
-        <label>Password </label>
-        <input  type="password" name="password" placeholder='Ingrese contraseña'/>
-        <button style={{marginLeft: '40%', width: '20%', backgroundColor:'rgb(140, 140, 245)'}} type='submit'>Cambiar</button>
-      </form>
-    </div>
+      <h5>Cambiar contraseña</h5>
+      <div className='Information-form'>
+        <form ref={form} onSubmit={handleSubmit}>
+          <label>Password </label>
+          <input  type="password" name="password" placeholder='Ingrese contraseña'/>
+          <button style={{marginLeft: '30%', width: '40%', backgroundColor:'rgb(140, 140, 245)'}} type='submit'>Cambiar</button>
+        </form>
+      </div>
   </div>
   )
 }
 
-export default function RecuperarPassword() {
+export function InfoUser() {
   const { isAuth } = useContext(userContext)
   const { data } = useQuery(GET_INFORMATION, {
     variables: { tokenUser: isAuth }

@@ -4,7 +4,9 @@ import { AddStartsComponents } from '../AddStartComponents'
 export function Historial({ product }) {
   return (
     <div className='tarjeta'>
-      <img src={product.url_imagen} alt="" />
+      <a href={`/book/${product.isbn}`}>
+      <img src={product.url_imagen} alt="imagen" />
+      </a>
       <div className='tarjeta-data'>
         <p className='name'>{product.nombre}</p>
         <p>{product.autor[0].nombre}</p>
