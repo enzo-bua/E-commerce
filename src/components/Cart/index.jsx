@@ -40,7 +40,7 @@ function CartItem ({product}) {
           <p className='autor'>{product.autor[0].nombre}</p>
           {
             product.descuento === 0 
-            ? <strong className='precio-original'>$ {product.precio}</strong>
+            ? <strong className='precio-original-cart'>$ {product.precio}</strong>
               : <>
                   <p> 
                     <span className='precio-tachado'>$ {product.precio}</span> 

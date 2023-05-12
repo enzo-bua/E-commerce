@@ -78,7 +78,7 @@ export function Modificar(props) {
         <label>Descripcion</label>
         <textarea  defaultValue={data && data.getBook.book[0].descripcion} type="text" name="descripcion" />
         <label>Genero </label>
-        <input  defaultValue={data && data.getBook.book[0].genero[0].nombre} type="text" name="genero" />
+        <input  defaultValue={data && data.getBook.book[0].genero[0] !== undefined && data.getBook.book[0].genero[0].nombre } type="text" name="genero" />
         <label>Precio </label>
         <input  defaultValue={data && data.getBook.book[0].precio} min="0" type="number" name="precio" />
         <label>Descuento </label>

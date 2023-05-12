@@ -11,12 +11,17 @@ import { AddComentarios } from '../AddComentarios'
 import { StartComponents } from '../StartComponents'
 import { useContext } from 'react'
 import { CountCartContext } from '../../Context/countCart'
+import { userContext } from '../../Context/user'
 
 export function TemplateLibro ({ product }) {
+  const { isAuth } = useContext(userContext)
+  console.log(isAuth)
   const { cart, addToCart} = useCart()
   const isProductInCart = cart.some(item => item.isbn === product[0].isbn) // si el product esta en cart
   const noAddToCart = () => {
-    toast.error('El producto ya esta en el carrito')
+    isProductInCart 
+      ? toast.error('El producto ya esta en el carrito')
+      : toast.error('Debe registrarse')
   }
 
   const {setCount} = useContext(CountCartContext)
@@ -67,11 +72,10 @@ export function TemplateLibro ({ product }) {
           <p>Stock diponible: {product[0].stock}</p>
 
           
-
           <button 
           className='button'
             onClick={() => {
-              isProductInCart
+              isProductInCart || isAuth === null 
                 ? noAddToCart()
                 :<>
                   {addToCart(product)}
